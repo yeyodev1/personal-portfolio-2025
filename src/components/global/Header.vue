@@ -25,12 +25,16 @@ import BaseButton from '@/components/base/BaseButton.vue';
 @use '@/styles/index.scss' as *;
 
 .header {
-  background-color: $YEYO-ORANGE;
+  background: linear-gradient(135deg,
+      $YEYO-VIOLET 0%,
+      rgba(26, 26, 46, 0.95) 50%,
+      rgba(34, 34, 59, 0.9) 100%);
+  backdrop-filter: blur(20px);
   padding: 1.5rem 1rem; // Padding mobile
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 1px solid $YEYO-ROSE;
+  border-bottom: 1px solid rgba(79, 172, 254, 0.2);
 
   &__container {
     max-width: 1200px;
@@ -44,11 +48,14 @@ import BaseButton from '@/components/base/BaseButton.vue';
     font-family: $font-principal;
     font-size: 1.75rem;
     font-weight: 700;
-    color: $YEYO-BLUE;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-decoration: none;
 
     &--dot {
-      color: $green;
+      color: #4facfe;
     }
   }
 
@@ -58,10 +65,29 @@ import BaseButton from '@/components/base/BaseButton.vue';
     a {
       margin: 0 1rem;
       font-weight: 500;
-      transition: color 0.3s ease;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
 
       &:hover {
-        color: $green;
+        color: #4facfe;
+        transform: translateY(-1px);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #4facfe, #00f2fe);
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
       }
     }
   }
@@ -76,7 +102,5 @@ import BaseButton from '@/components/base/BaseButton.vue';
   .header__nav {
     display: flex;
   }
-
-  // Aquí ocultaríamos el botón de hamburguesa y el BaseButton que está fuera de la nav
 }
 </style>

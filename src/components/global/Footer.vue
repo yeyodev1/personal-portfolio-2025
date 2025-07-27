@@ -21,12 +21,13 @@ const currentYear = new Date().getFullYear();
 
 .footer {
   background: linear-gradient(135deg, 
-    rgba(244, 194, 161, 0.95) 0%, 
-    rgba(232, 180, 160, 0.9) 20%,
-    rgba(74, 78, 105, 0.95) 60%,
-    $YEYO-BLUE 100%
+    $YEYO-VIOLET 0%, 
+    rgba(26, 26, 46, 0.95) 50%, 
+    rgba(34, 34, 59, 0.9) 100%
   );
-  color: $YEYO-ORANGE;
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(79, 172, 254, 0.2);
+  color: rgba(255, 255, 255, 0.9);
   padding: 3rem 1rem;
   text-align: center;
 
@@ -41,7 +42,7 @@ const currentYear = new Date().getFullYear();
 
   &__copy {
     font-size: 0.9rem;
-    color: $YEYO-ROSE;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   &__socials {
@@ -49,12 +50,22 @@ const currentYear = new Date().getFullYear();
     gap: 1.5rem;
 
     a {
-      color: $white;
+      color: rgba(255, 255, 255, 0.85);
       font-weight: 500;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
 
       &:hover {
-        color: $green;
+        color: #4facfe;
+        background: rgba(79, 172, 254, 0.1);
+        border-color: rgba(79, 172, 254, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(79, 172, 254, 0.2);
       }
     }
   }
