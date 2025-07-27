@@ -160,6 +160,20 @@ onMounted(() => {
           </BaseButton>
         </div>
 
+        <!-- Badge flotante para reclutadores -->
+        <div class="hero__recruiter-badge">
+          <a href="https://www.self.so/yeyodev" target="_blank" rel="noopener noreferrer" class="hero__recruiter-link">
+            <div class="hero__recruiter-pulse"></div>
+            <div class="hero__recruiter-content">
+              <span class="hero__recruiter-icon">💼</span>
+              <div class="hero__recruiter-text">
+                <strong>¿Hiring?</strong>
+                <small>Click aquí</small>
+              </div>
+            </div>
+          </a>
+        </div>
+
         <!-- Estadísticas del hero -->
         <div class="hero__stats">
           <div 
@@ -344,6 +358,22 @@ onMounted(() => {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
   40% { transform: translateY(-10px); }
   60% { transform: translateY(-5px); }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.1); }
 }
 
 // Sección Hero Principal
@@ -875,6 +905,92 @@ onMounted(() => {
     color: #48cae4;
   }
 
+  // Badge flotante para reclutadores
+  &__recruiter-badge {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 5;
+    animation: slide-in-right 1s ease-out 1.5s both;
+  }
+
+  &__recruiter-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, 
+      rgba(76, 175, 80, 0.9) 0%, 
+      rgba(67, 160, 71, 0.9) 50%,
+      rgba(56, 142, 60, 0.9) 100%
+    );
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: white;
+    text-decoration: none;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    
+    &:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 40px rgba(76, 175, 80, 0.4);
+      border-color: rgba(255, 255, 255, 0.4);
+      
+      .hero__recruiter-pulse {
+        animation: pulse-ring 1.5s ease-out infinite;
+      }
+      
+      .hero__recruiter-icon {
+        animation: bounce-gentle 0.6s ease;
+      }
+    }
+  }
+
+  &__recruiter-pulse {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid rgba(76, 175, 80, 0.6);
+    border-radius: 50px;
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  &__recruiter-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__recruiter-icon {
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+  }
+
+  &__recruiter-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    
+    strong {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.1rem;
+    }
+    
+    small {
+      font-size: 0.75rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+  }
+
   // Indicador de scroll
   &__scroll-indicator {
     position: absolute;
@@ -918,6 +1034,26 @@ onMounted(() => {
       width: 250px;
       height: 250px;
     }
+    
+    &__recruiter-badge {
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+    
+    &__recruiter-link {
+      padding: 0.875rem 1.25rem;
+      gap: 0.5rem;
+    }
+    
+    &__recruiter-text {
+      strong {
+        font-size: 0.85rem;
+      }
+      
+      small {
+        font-size: 0.7rem;
+      }
+    }
   }
 }
 
@@ -949,6 +1085,30 @@ onMounted(() => {
     &__avatar-initial {
       font-size: 3rem;
     }
+    
+    &__recruiter-badge {
+      top: 1rem;
+      right: 1rem;
+    }
+    
+    &__recruiter-link {
+      padding: 0.75rem 1rem;
+      gap: 0.5rem;
+    }
+    
+    &__recruiter-text {
+      strong {
+        font-size: 0.8rem;
+      }
+      
+      small {
+        font-size: 0.65rem;
+      }
+    }
+    
+    &__recruiter-icon {
+      font-size: 1.1rem;
+    }
   }
 }
 
@@ -969,6 +1129,40 @@ onMounted(() => {
     &__avatar-frame {
       width: 180px;
       height: 180px;
+    }
+    
+    &__recruiter-badge {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+    
+    &__recruiter-link {
+      padding: 0.625rem 0.875rem;
+      gap: 0.375rem;
+    }
+    
+    &__recruiter-text {
+      display: none; // Ocultar texto en pantallas muy pequeñas
+    }
+    
+    &__recruiter-icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .hero {
+    &__recruiter-badge {
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+    
+    &__recruiter-link {
+      padding: 0.5rem;
+      min-width: 44px; // Tamaño mínimo para touch targets
+      min-height: 44px;
+      justify-content: center;
     }
   }
 }

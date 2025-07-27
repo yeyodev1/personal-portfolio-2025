@@ -14,9 +14,20 @@ import BaseButton from '@/components/base/BaseButton.vue';
         <a href="#about">Sobre Mí</a>
         <a href="#contact">Contacto</a>
       </nav>
-      <BaseButton href="mailto:tu.email@example.com" variant="primary">
-        ¡Hablemos!
-      </BaseButton>
+      
+      <!-- Botones de acción -->
+      <div class="header__actions">
+        <!-- Botón especial para reclutadores -->
+        <a href="https://www.self.so/yeyodev" target="_blank" rel="noopener noreferrer" class="header__recruiter-btn">
+          <span class="header__recruiter-icon">🎯</span>
+          <span class="header__recruiter-text">Para Reclutadores</span>
+        </a>
+        
+        <!-- Botón principal de contacto -->
+        <BaseButton href="mailto:tu.email@example.com" variant="primary" class="header__contact-btn">
+          ¡Hablemos!
+        </BaseButton>
+      </div>
       </div>
   </header>
 </template>
@@ -91,9 +102,105 @@ import BaseButton from '@/components/base/BaseButton.vue';
       }
     }
   }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__recruiter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: linear-gradient(135deg, 
+      rgba(255, 193, 7, 0.9) 0%, 
+      rgba(255, 152, 0, 0.9) 50%,
+      rgba(255, 87, 34, 0.9) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent
+      );
+      transition: left 0.5s ease;
+    }
+    
+    &:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+      border-color: rgba(255, 255, 255, 0.4);
+      
+      &::before {
+        left: 100%;
+      }
+      
+      .header__recruiter-icon {
+        animation: pulse-target 0.6s ease;
+      }
+    }
+  }
+
+  &__recruiter-icon {
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  &__recruiter-text {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  &__contact-btn {
+    white-space: nowrap;
+  }
+}
+
+@keyframes pulse-target {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 // --- Estilos para pantallas más grandes ---
+@media (max-width: 767px) {
+  .header__recruiter-text {
+    display: none;
+  }
+  
+  .header__recruiter-btn {
+    padding: 0.6rem;
+    min-width: auto;
+  }
+  
+  .header__actions {
+    gap: 0.5rem;
+  }
+}
+
 @media (min-width: 768px) {
   .header {
     padding: 1.5rem 2rem;
@@ -101,6 +208,10 @@ import BaseButton from '@/components/base/BaseButton.vue';
 
   .header__nav {
     display: flex;
+  }
+  
+  .header__actions {
+    gap: 1rem;
   }
 }
 </style>
