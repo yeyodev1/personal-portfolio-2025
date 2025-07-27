@@ -435,7 +435,7 @@ onMounted(() => {
   // Grilla de proyectos
   &__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
     margin-bottom: 80px;
     opacity: 0;
@@ -445,6 +445,19 @@ onMounted(() => {
     &--visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    // Específico para móviles
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    @media (max-width: 375px) {
+      grid-template-columns: 1fr;
+      gap: 15px;
+      padding: 0 5px;
     }
   }
 
@@ -692,25 +705,35 @@ onMounted(() => {
 
 // --- Lógica de la animación en cascada ---
 
-// 6. Por defecto, las tarjetas están ocultas.
-.project-card {
+// Por defecto, las tarjetas están ocultas.
+.projects__card-wrapper {
   opacity: 0;
+  transform: translateY(30px);
 }
 
-// 7. Cuando el contenedor se hace visible...
-.projects__grid.is-visible {
-  .project-card {
-    // ...aplicamos la animación a cada tarjeta.
+// Cuando el contenedor se hace visible...
+.projects__grid--visible {
+  .projects__card-wrapper {
+    // Aplicamos la animación a cada tarjeta.
     animation: fade-in-up 0.6s ease-out forwards;
-    // 8. (LA MAGIA) Usamos la variable para calcular el retraso de cada tarjeta.
+    // Usamos la variable para calcular el retraso de cada tarjeta.
     animation-delay: calc(var(--stagger-index) * 120ms);
+  }
+}
+
+// Para móviles, reducimos el delay para mejor performance
+@media (max-width: 480px) {
+  .projects__grid--visible {
+    .projects__card-wrapper {
+      animation-delay: calc(var(--stagger-index) * 80ms);
+    }
   }
 }
 
 // Responsive Design
 @media (max-width: 768px) {
   .projects {
-    padding: 80px 0;
+    padding: 60px 0;
     
     &__container {
       padding: 0 15px;
@@ -723,27 +746,92 @@ onMounted(() => {
     &__grid {
       grid-template-columns: 1fr;
       gap: 20px;
+      margin-bottom: 60px;
     }
     
     &__stats {
       grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
     }
     
     &__filters {
       gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    &__header {
+      margin-bottom: 60px;
     }
   }
 }
 
 @media (max-width: 480px) {
   .projects {
+    padding: 40px 0;
+    
+    &__container {
+      padding: 0 10px;
+    }
+
     &__stats {
       grid-template-columns: 1fr;
+      gap: 10px;
     }
     
     &__filters {
       flex-direction: column;
       align-items: center;
+      gap: 8px;
+    }
+
+    &__filter {
+      width: 100%;
+      max-width: 200px;
+      text-align: center;
+    }
+
+    &__card {
+      min-height: auto;
+    }
+
+    &__card-image {
+      height: 200px;
+    }
+
+    &__card-content {
+      padding: 20px;
+    }
+
+    &__header {
+      margin-bottom: 40px;
+    }
+
+    &__grid {
+      margin-bottom: 40px;
+    }
+
+    &__cta {
+      padding: 40px 15px;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .projects {
+    &__container {
+      padding: 0 5px;
+    }
+
+    &__card-content {
+      padding: 15px;
+    }
+
+    &__card-title {
+      font-size: 1.2rem;
+    }
+
+    &__card-description {
+      font-size: 0.9rem;
     }
   }
 }

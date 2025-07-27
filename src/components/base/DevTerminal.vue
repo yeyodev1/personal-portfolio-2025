@@ -317,10 +317,10 @@ onMounted(() => {
         v-if="!isOpen"
         @click="openTerminal"
         class="dev-terminal__trigger"
-        title="¿Eres programador? Abre la terminal"
+        title="¿Eres programador o un reclutador curioso? Abre la terminal"
       >
         <span class="dev-terminal__trigger-icon">💻</span>
-        <span class="dev-terminal__trigger-text">¿Eres programador?</span>
+        <span class="dev-terminal__trigger-text">¿Eres programador o un reclutador curioso?</span>
       </button>
     </Transition>
 
