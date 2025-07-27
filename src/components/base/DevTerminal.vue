@@ -187,19 +187,19 @@ const commands = {
 };
 
 const addLine = (type: TerminalLine['type'], content: string) => {
-  const timestamp = new Date().toLocaleTimeString('es-ES', { 
+  const timestamp = new Date().toLocaleTimeString('es-ES', {
     hour12: false,
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit'
   });
-  
+
   terminalLines.value.push({
     type,
     content,
     timestamp
   });
-  
+
   nextTick(() => {
     if (terminalContent.value) {
       terminalContent.value.scrollTop = terminalContent.value.scrollHeight;
@@ -207,9 +207,9 @@ const addLine = (type: TerminalLine['type'], content: string) => {
   });
 };
 
-const typeWriter = async (lines: string[], delay = 50) => {
+const typeWriter = async (lines: string[], delay = 15) => {
   isTyping.value = true;
-  
+
   for (const line of lines) {
     let currentText = '';
     for (const char of line) {
@@ -218,34 +218,34 @@ const typeWriter = async (lines: string[], delay = 50) => {
       await new Promise(resolve => setTimeout(resolve, delay));
     }
     addLine('output', line);
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 30));
   }
-  
+
   isTyping.value = false;
 };
 
 const executeCommand = async (cmd: string) => {
   const trimmedCmd = cmd.trim().toLowerCase();
-  
+
   // Agregar comando a la terminal
   addLine('command', `$ ${cmd}`);
-  
+
   if (!trimmedCmd) return;
-  
+
   if (trimmedCmd === 'clear') {
     terminalLines.value = [];
     return;
   }
-  
+
   if (trimmedCmd === 'exit') {
     isOpen.value = false;
     return;
   }
-  
+
   const command = commands[trimmedCmd as keyof typeof commands];
-  
+
   if (command) {
-    await typeWriter(command.output, 30);
+    await typeWriter(command.output, 10);
   } else {
     addLine('error', `Comando no encontrado: ${trimmedCmd}`);
     addLine('info', 'Escribe "help" para ver los comandos disponibles');
@@ -261,7 +261,7 @@ const handleKeyPress = (event: KeyboardEvent) => {
 
 const openTerminal = () => {
   isOpen.value = true;
-  
+
   if (terminalLines.value.length === 0) {
     // Mensaje de bienvenida
     setTimeout(() => {
@@ -270,7 +270,7 @@ const openTerminal = () => {
       addLine('info', '');
     }, 500);
   }
-  
+
   nextTick(() => {
     if (commandInput.value) {
       commandInput.value.focus();
@@ -297,10 +297,10 @@ onMounted(() => {
   const checkIsDesktop = () => {
     isDesktop.value = window.innerWidth >= 1024;
   };
-  
+
   checkIsDesktop();
   window.addEventListener('resize', checkIsDesktop);
-  
+
   // Cleanup
   return () => {
     window.removeEventListener('resize', checkIsDesktop);
@@ -317,10 +317,10 @@ onMounted(() => {
         v-if="!isOpen"
         @click="openTerminal"
         class="dev-terminal__trigger"
-        title="¿Eres programador o un reclutador curioso? Abre la terminal"
+        title="¿Eres programador, entra aquí? Abre la terminal"
       >
         <span class="dev-terminal__trigger-icon">💻</span>
-        <span class="dev-terminal__trigger-text">¿Eres programador o un reclutador curioso?</span>
+        <span class="dev-terminal__trigger-text">¿Eres programador, entra aquí?</span>
       </button>
     </Transition>
 
@@ -483,7 +483,7 @@ onMounted(() => {
 
   &--close {
     background: #ff5f57;
-    
+
     &:hover {
       background: #ff3b30;
     }
@@ -491,7 +491,7 @@ onMounted(() => {
 
   &--minimize {
     background: #ffbd2e;
-    
+
     &:hover {
       background: #ff9500;
     }
@@ -499,7 +499,7 @@ onMounted(() => {
 
   &--maximize {
     background: #28ca42;
-    
+
     &:hover {
       background: #00c851;
     }
@@ -535,7 +535,7 @@ onMounted(() => {
   &::-webkit-scrollbar-thumb {
     background: rgba(79, 172, 254, 0.3);
     border-radius: 4px;
-    
+
     &:hover {
       background: rgba(79, 172, 254, 0.5);
     }
@@ -544,20 +544,20 @@ onMounted(() => {
 
 .dev-terminal__line {
   margin-bottom: 0.25rem;
-  
+
   &--command {
     color: #4facfe;
     font-weight: 600;
   }
-  
+
   &--output {
     color: rgba(255, 255, 255, 0.9);
   }
-  
+
   &--error {
     color: #ff6b6b;
   }
-  
+
   &--info {
     color: #51cf66;
   }
@@ -583,11 +583,11 @@ onMounted(() => {
   font-family: inherit;
   font-size: inherit;
   flex: 1;
-  
+
   &::placeholder {
     color: rgba(255, 255, 255, 0.4);
   }
-  
+
   &:disabled {
     opacity: 0.6;
   }
@@ -597,7 +597,7 @@ onMounted(() => {
   color: #4facfe;
   animation: blink 1s step-end infinite;
   margin-left: 2px;
-  
+
   &--typing {
     animation: none;
     opacity: 1;
@@ -606,19 +606,26 @@ onMounted(() => {
 
 // Animaciones
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
 }
 
 @keyframes blink {
-  0%, 50% {
+
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+
+  51%,
+  100% {
     opacity: 0;
   }
 }
