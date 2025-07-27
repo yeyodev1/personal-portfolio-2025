@@ -174,14 +174,23 @@ onMounted(() => {
   }
 }
 
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 .stack {
   padding: 8rem 1.5rem;
   background: linear-gradient(135deg, 
-    $YEYO-ORANGE 0%, 
-    rgba(244, 194, 161, 0.9) 30%,
-    rgba(232, 180, 160, 0.8) 60%,
-    rgba(244, 194, 161, 0.85) 100%
+    $YEYO-VIOLET 0%, 
+    rgba(26, 26, 46, 0.95) 20%, 
+    rgba(22, 33, 62, 0.9) 40%, 
+    rgba(15, 52, 96, 0.85) 60%, 
+    rgba(34, 34, 59, 0.8) 80%, 
+    rgba(34, 34, 59, 0.8) 100%
   );
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -204,18 +213,19 @@ onMounted(() => {
 .stack__title {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  background: linear-gradient(135deg, #22223b, #9a031e);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
 }
 
 .stack__subtitle {
   font-size: 1.25rem;
-  color: #22223b;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 300;
   max-width: 600px;
   margin: 0 auto;
@@ -240,11 +250,11 @@ onMounted(() => {
 
 .stack__category {
   opacity: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 24px;
   padding: 2.5rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   
@@ -283,18 +293,18 @@ onMounted(() => {
   gap: 1rem;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(66, 184, 131, 0.2);
+  border-bottom: 2px solid rgba(79, 172, 254, 0.3);
 }
 
 .stack__category-icon {
   font-size: 2rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .stack__category-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #22223b;
+  color: rgba(255, 255, 255, 0.95);
   margin: 0;
 }
 
@@ -315,18 +325,19 @@ onMounted(() => {
 }
 
 .stack__skill-content {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 1.5rem;
-  border: 1px solid rgba(34, 34, 59, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   
   &:hover {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.12);
     transform: translateX(4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(79, 172, 254, 0.3);
   }
 }
 
@@ -339,22 +350,23 @@ onMounted(() => {
 
 .stack__skill-name {
   font-weight: 600;
-  color: #22223b;
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1rem;
 }
 
 .stack__skill-level {
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--category-color);
-  background: rgba(66, 184, 131, 0.1);
+  color: #4facfe;
+  background: rgba(79, 172, 254, 0.1);
+  border: 1px solid rgba(79, 172, 254, 0.2);
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
 }
 
 .stack__skill-bar {
   height: 6px;
-  background: rgba(34, 34, 59, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
   overflow: hidden;
   position: relative;
@@ -431,7 +443,7 @@ onMounted(() => {
 .stack__bg-circle {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(242, 233, 228, 0.1), rgba(34, 34, 59, 0.1));
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.05));
   animation: float 6s ease-in-out infinite;
   
   &--1 {

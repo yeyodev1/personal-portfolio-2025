@@ -166,10 +166,10 @@ onMounted(() => {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(66, 184, 131, 0.3);
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(66, 184, 131, 0.6);
+    box-shadow: 0 0 40px rgba(79, 172, 254, 0.6);
   }
 }
 
@@ -235,15 +235,24 @@ onMounted(() => {
   }
 }
 
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 // Estilos principales
 .about {
   padding: 8rem 1.5rem;
   background: linear-gradient(135deg, 
-    rgba(244, 194, 161, 0.85) 0%, 
-    $YEYO-ORANGE 30%,
-    rgba(232, 180, 160, 0.9) 70%,
-    rgba(244, 194, 161, 0.95) 100%
+    $YEYO-VIOLET 0%, 
+    rgba(26, 26, 46, 0.95) 20%, 
+    rgba(22, 33, 62, 0.9) 40%, 
+    rgba(15, 52, 96, 0.85) 60%, 
+    rgba(34, 34, 59, 0.8) 80%, 
+    rgba(34, 34, 59, 0.8) 100%
   );
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -269,7 +278,7 @@ onMounted(() => {
 .about__bg-circle {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(66, 184, 131, 0.1), rgba(154, 3, 30, 0.1));
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.05));
   animation: float-gentle 8s ease-in-out infinite;
 
   &--1 {
@@ -372,10 +381,12 @@ onMounted(() => {
 
 .about__title-line {
   display: inline-block;
-  background: linear-gradient(135deg, #22223b, #4a4e69);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
   opacity: 0;
 
   .about.is-visible & {
@@ -386,10 +397,12 @@ onMounted(() => {
     }
 
     &--accent {
-      background: linear-gradient(135deg, #42b883, #66d9a5);
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
       animation-delay: 0.4s;
     }
   }
@@ -398,7 +411,7 @@ onMounted(() => {
 .about__title-decoration {
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, #42b883, #66d9a5);
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
   margin: 2rem auto 0;
   border-radius: 2px;
   opacity: 0;
@@ -432,12 +445,12 @@ onMounted(() => {
 }
 
 .about__text-content {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
   border-radius: 24px;
   padding: 3rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
 
@@ -448,7 +461,7 @@ onMounted(() => {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(66, 184, 131, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(79, 172, 254, 0.1), transparent);
     animation: shimmer 3s infinite;
   }
 
@@ -460,7 +473,7 @@ onMounted(() => {
 .about__intro-text {
   font-family: $font-secondary;
   font-size: 1.125rem;
-  color: #22223b;
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.8;
   margin-bottom: 1.5rem;
 
@@ -469,13 +482,13 @@ onMounted(() => {
   }
 
   strong {
-    color: #42b883;
+    color: #4facfe;
     font-weight: 700;
   }
 }
 
 .about__highlight {
-  background: linear-gradient(135deg, #42b883, #66d9a5);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -490,7 +503,7 @@ onMounted(() => {
 .about__skills-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #22223b;
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -503,19 +516,19 @@ onMounted(() => {
 }
 
 .about__skill-tag {
-  background: linear-gradient(135deg, #42b883, #66d9a5);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 25px;
   font-size: 0.875rem;
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(66, 184, 131, 0.3);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
   transition: all 0.3s ease;
   opacity: 0;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(66, 184, 131, 0.4);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
   }
 
   .about.is-visible & {
@@ -548,7 +561,7 @@ onMounted(() => {
   position: relative;
   border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient(135deg, #42b883, #66d9a5);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   padding: 4px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   transition: all 0.4s ease;
@@ -578,7 +591,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(66, 184, 131, 0.1), rgba(154, 3, 30, 0.1));
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 20px;
@@ -598,7 +611,7 @@ onMounted(() => {
 .about__decoration-dot {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #42b883, #66d9a5);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   border-radius: 50%;
   animation: pulse-glow 2s ease-in-out infinite;
 }
@@ -609,7 +622,7 @@ onMounted(() => {
   left: 30px;
   width: 100px;
   height: 2px;
-  background: linear-gradient(90deg, #42b883, transparent);
+  background: linear-gradient(90deg, #4facfe, transparent);
   transform: rotate(45deg);
 }
 
@@ -636,13 +649,13 @@ onMounted(() => {
 }
 
 .about__achievement-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem 1.5rem;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   transition: all 0.4s ease;
   opacity: 0;
   position: relative;
@@ -655,12 +668,12 @@ onMounted(() => {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #42b883, #66d9a5);
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
   }
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
   }
 
   .about.is-visible & {
@@ -682,7 +695,7 @@ onMounted(() => {
 .about__achievement-number {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #42b883, #66d9a5);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -696,9 +709,9 @@ onMounted(() => {
 
 .about__achievement-label {
   font-size: 0.875rem;
-  color: #22223b;
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 600;
-  opacity: 0.8;
+  opacity: 0.9;
   line-height: 1.4;
 }
 </style>

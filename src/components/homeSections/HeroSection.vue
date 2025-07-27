@@ -355,9 +355,10 @@ onMounted(() => {
   align-items: center;
   background: linear-gradient(135deg, 
     $YEYO-VIOLET 0%, 
-    rgba(26, 26, 46, 0.95) 25%, 
-    rgba(22, 33, 62, 0.9) 50%, 
-    rgba(15, 52, 96, 0.85) 75%, 
+    rgba(26, 26, 46, 0.95) 20%, 
+    rgba(22, 33, 62, 0.9) 40%, 
+    rgba(15, 52, 96, 0.85) 60%, 
+    rgba(34, 34, 59, 0.8) 80%, 
     rgba(34, 34, 59, 0.8) 100%
   );
   
