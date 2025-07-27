@@ -2,8 +2,7 @@
 import Footer from './components/global/Footer.vue';
 import Header from './components/global/Header.vue';
 import ToastNotification from './components/global/ToastNotification.vue';
-
-
+import DevTerminal from './components/base/DevTerminal.vue';
 </script>
 
 <template>
@@ -13,6 +12,7 @@ import ToastNotification from './components/global/ToastNotification.vue';
   </main>
   <ToastNotification/>
   <Footer />
+  <DevTerminal />
 </template>
 
 <style lang="scss">
