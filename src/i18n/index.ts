@@ -3,17 +3,15 @@ import { createI18n } from 'vue-i18n'
 // Mensajes en español
 const es = {
   nav: {
-    projects: 'Proyectos',
-    about: 'Sobre Mí',
     blog: 'Blog',
-    contact: 'Contacto'
+    contact: 'Contacto',
   },
   buttons: {
     letsTalk: '¡Hablemos!',
     forRecruiters: 'Para Reclutadores',
     viewProjects: 'Ver Mis Proyectos',
     downloadCV: 'Descargar CV',
-    contact: 'Contactar'
+    contact: 'Contactar',
   },
   hero: {
     greeting: 'Hola, soy',
@@ -21,37 +19,42 @@ const es = {
     roles: {
       frontend: 'Frontend Developer',
       fullstack: 'Fullstack Developer',
-      uiux: 'UI/UX Designer'
+      uiux: 'UI/UX Designer',
     },
-    description: 'Desarrollador de software especializado en crear experiencias web excepcionales con Vue.js, TypeScript y tecnologías modernas.',
+    description:
+      'Desarrollador de software especializado en crear experiencias web excepcionales con Vue.js, TypeScript y tecnologías modernas.',
     hiringBadge: {
       question: '¿Hiring?',
-      action: 'Click aquí'
-    }
+      action: 'Click aquí',
+    },
   },
   projects: {
     badge: 'Portfolio',
     title: 'Mis',
     titleAccent: 'Proyectos',
-    subtitle: 'Una colección de proyectos que demuestran mi experiencia en desarrollo frontend y fullstack',
+    subtitle:
+      'Una colección de proyectos que demuestran mi experiencia en desarrollo frontend y fullstack',
     cta: {
       text: '¿Tienes un proyecto en mente? ¡Hablemos!',
-      button: 'Contactar'
-    }
+      button: 'Contactar',
+    },
   },
   about: {
     title: 'Sobre',
     titleAccent: 'Mí',
     intro: {
-      paragraph1: '¡Hola! Soy <strong>Diego</strong>, un desarrollador de software con una profunda pasión por la <span class="about__highlight">arquitectura de sistemas</span> y la creación de experiencias de usuario memorables.',
-      paragraph2: 'Mi enfoque se centra en escribir <span class="about__highlight">código limpio, escalable y bien documentado</span>, aplicando principios sólidos para construir productos que no solo funcionen hoy, sino que sean fáciles de mantener y evolucionar mañana.',
-      paragraph3: 'Disfruto desentrañando problemas complejos y traduciendo ideas en soluciones tecnológicas robustas. Siempre estoy explorando nuevas herramientas y paradigmas para mantenerme a la vanguardia.'
+      paragraph1:
+        '¡Hola! Soy <strong>Diego</strong>, un desarrollador de software con una profunda pasión por la <span class="about__highlight">arquitectura de sistemas</span> y la creación de experiencias de usuario memorables.',
+      paragraph2:
+        'Mi enfoque se centra en escribir <span class="about__highlight">código limpio, escalable y bien documentado</span>, aplicando principios sólidos para construir productos que no solo funcionen hoy, sino que sean fáciles de mantener y evolucionar mañana.',
+      paragraph3:
+        'Disfruto desentrañando problemas complejos y traduciendo ideas en soluciones tecnológicas robustas. Siempre estoy explorando nuevas herramientas y paradigmas para mantenerme a la vanguardia.',
     },
     achievements: {
       projects: 'Proyectos Completados',
       experience: 'Años de Experiencia',
       technologies: 'Tecnologías Dominadas',
-      dedication: 'Dedicación'
+      dedication: 'Dedicación',
     },
     skills: {
       architecture: 'Arquitectura de Software',
@@ -59,15 +62,15 @@ const es = {
       agile: 'Metodologías Ágiles',
       leadership: 'Liderazgo Técnico',
       performance: 'Optimización de Performance',
-      testing: 'Testing & QA'
-    }
+      testing: 'Testing & QA',
+    },
   },
   terminal: {
     trigger: {
-      text: 'Abrir Terminal'
+      text: 'Abrir Terminal',
     },
     input: {
-      placeholder: 'Escribe un comando...'
+      placeholder: 'Escribe un comando...',
     },
     commands: {
       help: {
@@ -82,58 +85,59 @@ const es = {
         techStack: '  tech-stack   - Stack tecnológico actual',
         clear: '  clear        - Limpia la terminal',
         exit: '  exit         - Cierra la terminal',
-        tip: 'Tip: Usa TAB para autocompletar comandos'
-      }
-    }
+        tip: 'Tip: Usa TAB para autocompletar comandos',
+      },
+    },
   },
   footer: {
     copyright: 'Todos los derechos reservados.',
     recruiter: {
       question: '¿Eres reclutador y solo quieres ver qué he hecho?',
-      action: 'Presiona aquí para mi perfil completo'
-    }
+      action: 'Presiona aquí para mi perfil completo',
+    },
   },
   blog: {
     hero: {
       badge: 'Blog',
       title: 'Pensamientos y',
       titleAccent: 'Reflexiones',
-      subtitle: 'Comparto mis experiencias, aprendizajes y perspectivas sobre desarrollo de software, arquitectura y tecnología.',
+      subtitle:
+        'Comparto mis experiencias, aprendizajes y perspectivas sobre desarrollo de software, arquitectura y tecnología.',
       stats: {
         posts: '25+',
         postsLabel: 'Artículos',
         categories: '6',
         categoriesLabel: 'Categorías',
         readers: '1K+',
-        readersLabel: 'Lectores'
+        readersLabel: 'Lectores',
       },
       cta: {
         explore: 'Explorar Artículos',
-        newsletter: 'Newsletter'
+        newsletter: 'Newsletter',
       },
-      scrollDown: 'Scroll para explorar'
+      scrollDown: 'Scroll para explorar',
     },
     filters: {
       search: {
-        placeholder: 'Buscar artículos...'
+        placeholder: 'Buscar artículos...',
       },
       categories: {
-        all: 'Todas las categorías'
+        all: 'Todas las categorías',
       },
       viewMode: {
         grid: 'Vista en cuadrícula',
-        list: 'Vista en lista'
+        list: 'Vista en lista',
       },
       clear: 'Limpiar filtros',
       results: {
         found: 'artículos encontrados',
-        noResults: 'No se encontraron artículos'
-      }
+        noResults: 'No se encontraron artículos',
+      },
     },
     card: {
       readMore: 'Leer más',
       readTime: 'min de lectura',
-      publishedOn: 'Publicado el'
+      publishedOn: 'Publicado el',
     },
     post: {
       backToBlog: 'Volver al Blog',
@@ -146,30 +150,30 @@ const es = {
         title: 'Compartir artículo',
         twitter: 'Compartir en Twitter',
         linkedin: 'Compartir en LinkedIn',
-        copy: 'Copiar enlace'
+        copy: 'Copiar enlace',
       },
       relatedPosts: {
         title: 'Artículos Relacionados',
-        subtitle: 'Otros artículos que podrían interesarte'
-      }
+        subtitle: 'Otros artículos que podrían interesarte',
+      },
     },
     loading: 'Cargando artículos...',
     loadMore: 'Cargar más artículos',
     error: {
       title: 'Error al cargar',
       message: 'No se pudieron cargar los artículos. Por favor, inténtalo de nuevo.',
-      retry: 'Reintentar'
+      retry: 'Reintentar',
     },
     empty: {
       title: 'No hay artículos',
-      message: 'Aún no hay artículos publicados. ¡Vuelve pronto para ver nuevo contenido!'
+      message: 'Aún no hay artículos publicados. ¡Vuelve pronto para ver nuevo contenido!',
     },
     states: {
       loading: 'Cargando artículos...',
       error: 'Error al cargar los artículos',
       empty: 'No hay artículos disponibles',
       postNotFound: 'Artículo no encontrado',
-      postError: 'Error al cargar el artículo'
+      postError: 'Error al cargar el artículo',
     },
     categories: {
       frontend: 'Frontend',
@@ -177,63 +181,66 @@ const es = {
       architecture: 'Arquitectura',
       career: 'Carrera',
       tutorials: 'Tutoriales',
-      thoughts: 'Reflexiones'
-    }
-  }
+      thoughts: 'Reflexiones',
+    },
+  },
 }
 
 // Mensajes en inglés
 const en = {
   nav: {
-    projects: 'Projects',
-    about: 'About Me',
     blog: 'Blog',
-    contact: 'Contact'
+    contact: 'Contact',
   },
   buttons: {
     letsTalk: "Let's Talk!",
     forRecruiters: 'For Recruiters',
     viewProjects: 'View My Projects',
     downloadCV: 'Download CV',
-    contact: 'Contact'
+    contact: 'Contact',
   },
   hero: {
-    greeting: 'Hi, I\'m',
+    greeting: "Hi, I'm",
     name: 'Diego Reyes',
     roles: {
       frontend: 'Frontend Developer',
       fullstack: 'Fullstack Developer',
-      uiux: 'UI/UX Designer'
+      uiux: 'UI/UX Designer',
     },
-    description: 'Software developer specialized in creating exceptional web experiences with Vue.js, TypeScript and modern technologies.',
+    description:
+      'Software developer specialized in creating exceptional web experiences with Vue.js, TypeScript and modern technologies.',
     hiringBadge: {
       question: 'Hiring?',
-      action: 'Click here'
-    }
+      action: 'Click here',
+    },
   },
   projects: {
     badge: 'Portfolio',
     title: 'My',
     titleAccent: 'Projects',
-    subtitle: 'A collection of projects that demonstrate my expertise in frontend and fullstack development',
+    subtitle:
+      'A collection of projects that demonstrate my expertise in frontend and fullstack development',
     cta: {
-      text: 'Have a project in mind? Let\'s talk!',
-      button: 'Contact'
-    }
+      text: "Have a project in mind? Let's talk!",
+      button: 'Contact',
+    },
   },
   about: {
     title: 'About',
     titleAccent: 'Me',
     intro: {
-      paragraph1: 'Hello! I\'m <strong>Diego</strong>, a software developer with a deep passion for <span class="about__highlight">systems architecture</span> and creating memorable user experiences.',
-      paragraph2: 'My approach focuses on writing <span class="about__highlight">clean, scalable and well-documented code</span>, applying solid principles to build products that not only work today, but are easy to maintain and evolve tomorrow.',
-      paragraph3: 'I enjoy unraveling complex problems and translating ideas into robust technological solutions. I\'m always exploring new tools and paradigms to stay at the forefront.'
+      paragraph1:
+        'Hello! I\'m <strong>Diego</strong>, a software developer with a deep passion for <span class="about__highlight">systems architecture</span> and creating memorable user experiences.',
+      paragraph2:
+        'My approach focuses on writing <span class="about__highlight">clean, scalable and well-documented code</span>, applying solid principles to build products that not only work today, but are easy to maintain and evolve tomorrow.',
+      paragraph3:
+        "I enjoy unraveling complex problems and translating ideas into robust technological solutions. I'm always exploring new tools and paradigms to stay at the forefront.",
     },
     achievements: {
       projects: 'Completed Projects',
       experience: 'Years of Experience',
       technologies: 'Technologies Mastered',
-      dedication: 'Dedication'
+      dedication: 'Dedication',
     },
     skills: {
       architecture: 'Software Architecture',
@@ -241,21 +248,21 @@ const en = {
       agile: 'Agile Methodologies',
       leadership: 'Technical Leadership',
       performance: 'Performance Optimization',
-      testing: 'Testing & QA'
-    }
+      testing: 'Testing & QA',
+    },
   },
   terminal: {
     trigger: {
-      text: 'Open Terminal'
+      text: 'Open Terminal',
     },
     input: {
-      placeholder: 'Type a command...'
+      placeholder: 'Type a command...',
     },
     commands: {
       help: {
         description: 'Shows all available commands',
         title: 'Available commands:',
-        about: '  about        - Diego\'s personal information',
+        about: "  about        - Diego's personal information",
         skills: '  skills       - Technologies and skills list',
         projects: '  projects     - Featured projects',
         experience: '  experience   - Professional experience',
@@ -264,58 +271,59 @@ const en = {
         techStack: '  tech-stack   - Current tech stack',
         clear: '  clear        - Clear the terminal',
         exit: '  exit         - Close the terminal',
-        tip: 'Tip: Use ↑↓ arrows to navigate through history'
-      }
-    }
+        tip: 'Tip: Use ↑↓ arrows to navigate through history',
+      },
+    },
   },
   footer: {
     copyright: 'All rights reserved.',
     recruiter: {
-      question: 'Are you a recruiter and just want to see what I\'ve done?',
-      action: 'Press here for my complete profile'
-    }
+      question: "Are you a recruiter and just want to see what I've done?",
+      action: 'Press here for my complete profile',
+    },
   },
   blog: {
     hero: {
       badge: 'Blog',
       title: 'Thoughts and',
       titleAccent: 'Reflections',
-      subtitle: 'I share my experiences, learnings and perspectives on software development, architecture and technology.',
+      subtitle:
+        'I share my experiences, learnings and perspectives on software development, architecture and technology.',
       stats: {
         posts: '25+',
         postsLabel: 'Articles',
         categories: '6',
         categoriesLabel: 'Categories',
         readers: '1K+',
-        readersLabel: 'Readers'
+        readersLabel: 'Readers',
       },
       cta: {
         explore: 'Explore Articles',
-        newsletter: 'Newsletter'
+        newsletter: 'Newsletter',
       },
-      scrollDown: 'Scroll to explore'
+      scrollDown: 'Scroll to explore',
     },
     filters: {
       search: {
-        placeholder: 'Search articles...'
+        placeholder: 'Search articles...',
       },
       categories: {
-        all: 'All categories'
+        all: 'All categories',
       },
       viewMode: {
         grid: 'Grid view',
-        list: 'List view'
+        list: 'List view',
       },
       clear: 'Clear filters',
       results: {
         found: 'articles found',
-        noResults: 'No articles found'
-      }
+        noResults: 'No articles found',
+      },
     },
     card: {
       readMore: 'Read more',
       readTime: 'min read',
-      publishedOn: 'Published on'
+      publishedOn: 'Published on',
     },
     post: {
       backToBlog: 'Back to Blog',
@@ -328,30 +336,30 @@ const en = {
         title: 'Share article',
         twitter: 'Share on Twitter',
         linkedin: 'Share on LinkedIn',
-        copy: 'Copy link'
+        copy: 'Copy link',
       },
       relatedPosts: {
         title: 'Related Articles',
-        subtitle: 'Other articles you might find interesting'
-      }
+        subtitle: 'Other articles you might find interesting',
+      },
     },
     loading: 'Loading articles...',
     loadMore: 'Load more articles',
     error: {
       title: 'Loading Error',
       message: 'Could not load articles. Please try again.',
-      retry: 'Retry'
+      retry: 'Retry',
     },
     empty: {
       title: 'No Articles',
-      message: 'No articles have been published yet. Come back soon for new content!'
+      message: 'No articles have been published yet. Come back soon for new content!',
     },
     states: {
       loading: 'Loading articles...',
       error: 'Error loading articles',
       empty: 'No articles available',
       postNotFound: 'Article not found',
-      postError: 'Error loading article'
+      postError: 'Error loading article',
     },
     categories: {
       frontend: 'Frontend',
@@ -359,9 +367,9 @@ const en = {
       architecture: 'Architecture',
       career: 'Career',
       tutorials: 'Tutorials',
-      thoughts: 'Thoughts'
-    }
-  }
+      thoughts: 'Thoughts',
+    },
+  },
 }
 
 const i18n = createI18n({
@@ -370,8 +378,8 @@ const i18n = createI18n({
   fallbackLocale: 'es',
   messages: {
     es,
-    en
-  }
+    en,
+  },
 })
 
 export default i18n

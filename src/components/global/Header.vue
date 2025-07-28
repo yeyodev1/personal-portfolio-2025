@@ -17,8 +17,6 @@ onMounted(() => {
         yeyodev<span class="header__logo--dot">.</span>
       </a>
       <nav class="header__nav">
-        <a href="#projects">{{ t('nav.projects') }}</a>
-        <a href="#about">{{ t('nav.about') }}</a>
         <router-link to="/blog">{{ t('nav.blog') }}</router-link>
         <a href="#contact">{{ t('nav.contact') }}</a>
       </nav>
@@ -87,7 +85,8 @@ onMounted(() => {
   &__nav {
     display: none; // Oculto en mobile-first
 
-    a, :deep(a) {
+    a,
+    :deep(a) {
       margin: 0 1rem;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.85);
@@ -114,10 +113,10 @@ onMounted(() => {
       &:hover::after {
         width: 100%;
       }
-      
+
       &.router-link-active {
         color: #4facfe;
-        
+
         &::after {
           width: 100%;
         }
@@ -145,14 +144,14 @@ onMounted(() => {
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     backdrop-filter: blur(10px);
-    
+
     &:hover {
       background: rgba(255, 255, 255, 0.15);
       border-color: rgba(79, 172, 254, 0.5);
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(79, 172, 254, 0.2);
     }
-    
+
     &:active {
       transform: translateY(0);
     }
@@ -254,21 +253,21 @@ onMounted(() => {
   .header__language-text {
     display: none;
   }
-  
+
   .header__language-btn {
     padding: 0.5rem;
     min-width: auto;
   }
-  
+
   .header__recruiter-text {
     display: none;
   }
-  
+
   .header__recruiter-btn {
     padding: 0.6rem;
     min-width: auto;
   }
-  
+
   .header__actions {
     gap: 0.4rem;
   }
