@@ -17,8 +17,8 @@ onMounted(() => {
         yeyodev<span class="header__logo--dot">.</span>
       </a>
       <nav class="header__nav">
+        <router-link to="/">{{ t('home') }}</router-link>
         <router-link to="/blog">{{ t('nav.blog') }}</router-link>
-        <a href="#contact">{{ t('nav.contact') }}</a>
       </nav>
       
       <!-- Botones de acción -->

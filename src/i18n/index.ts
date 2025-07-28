@@ -4,7 +4,6 @@ import { createI18n } from 'vue-i18n'
 const es = {
   nav: {
     blog: 'Blog',
-    contact: 'Contacto',
   },
   buttons: {
     letsTalk: '¡Hablemos!',
@@ -194,7 +193,6 @@ const es = {
 const en = {
   nav: {
     blog: 'Blog',
-    contact: 'Contact',
   },
   buttons: {
     letsTalk: "Let's Talk!",
