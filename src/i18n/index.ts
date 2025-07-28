@@ -5,6 +5,7 @@ const es = {
   nav: {
     projects: 'Proyectos',
     about: 'Sobre Mí',
+    blog: 'Blog',
     contact: 'Contacto'
   },
   buttons: {
@@ -91,6 +92,93 @@ const es = {
       question: '¿Eres reclutador y solo quieres ver qué he hecho?',
       action: 'Presiona aquí para mi perfil completo'
     }
+  },
+  blog: {
+    hero: {
+      badge: 'Blog',
+      title: 'Pensamientos y',
+      titleAccent: 'Reflexiones',
+      subtitle: 'Comparto mis experiencias, aprendizajes y perspectivas sobre desarrollo de software, arquitectura y tecnología.',
+      stats: {
+        posts: '25+',
+        postsLabel: 'Artículos',
+        categories: '6',
+        categoriesLabel: 'Categorías',
+        readers: '1K+',
+        readersLabel: 'Lectores'
+      },
+      cta: {
+        explore: 'Explorar Artículos',
+        newsletter: 'Newsletter'
+      },
+      scrollDown: 'Scroll para explorar'
+    },
+    filters: {
+      search: {
+        placeholder: 'Buscar artículos...'
+      },
+      categories: {
+        all: 'Todas las categorías'
+      },
+      viewMode: {
+        grid: 'Vista en cuadrícula',
+        list: 'Vista en lista'
+      },
+      clear: 'Limpiar filtros',
+      results: {
+        found: 'artículos encontrados',
+        noResults: 'No se encontraron artículos'
+      }
+    },
+    card: {
+      readMore: 'Leer más',
+      readTime: 'min de lectura',
+      publishedOn: 'Publicado el'
+    },
+    post: {
+      backToBlog: 'Volver al Blog',
+      tableOfContents: 'Tabla de Contenidos',
+      publishedOn: 'Publicado el',
+      readTime: 'min de lectura',
+      category: 'Categoría',
+      tags: 'Etiquetas',
+      share: {
+        title: 'Compartir artículo',
+        twitter: 'Compartir en Twitter',
+        linkedin: 'Compartir en LinkedIn',
+        copy: 'Copiar enlace'
+      },
+      relatedPosts: {
+        title: 'Artículos Relacionados',
+        subtitle: 'Otros artículos que podrían interesarte'
+      }
+    },
+    loading: 'Cargando artículos...',
+    loadMore: 'Cargar más artículos',
+    error: {
+      title: 'Error al cargar',
+      message: 'No se pudieron cargar los artículos. Por favor, inténtalo de nuevo.',
+      retry: 'Reintentar'
+    },
+    empty: {
+      title: 'No hay artículos',
+      message: 'Aún no hay artículos publicados. ¡Vuelve pronto para ver nuevo contenido!'
+    },
+    states: {
+      loading: 'Cargando artículos...',
+      error: 'Error al cargar los artículos',
+      empty: 'No hay artículos disponibles',
+      postNotFound: 'Artículo no encontrado',
+      postError: 'Error al cargar el artículo'
+    },
+    categories: {
+      frontend: 'Frontend',
+      backend: 'Backend',
+      architecture: 'Arquitectura',
+      career: 'Carrera',
+      tutorials: 'Tutoriales',
+      thoughts: 'Reflexiones'
+    }
   }
 }
 
@@ -99,6 +187,7 @@ const en = {
   nav: {
     projects: 'Projects',
     about: 'About Me',
+    blog: 'Blog',
     contact: 'Contact'
   },
   buttons: {
@@ -184,6 +273,93 @@ const en = {
     recruiter: {
       question: 'Are you a recruiter and just want to see what I\'ve done?',
       action: 'Press here for my complete profile'
+    }
+  },
+  blog: {
+    hero: {
+      badge: 'Blog',
+      title: 'Thoughts and',
+      titleAccent: 'Reflections',
+      subtitle: 'I share my experiences, learnings and perspectives on software development, architecture and technology.',
+      stats: {
+        posts: '25+',
+        postsLabel: 'Articles',
+        categories: '6',
+        categoriesLabel: 'Categories',
+        readers: '1K+',
+        readersLabel: 'Readers'
+      },
+      cta: {
+        explore: 'Explore Articles',
+        newsletter: 'Newsletter'
+      },
+      scrollDown: 'Scroll to explore'
+    },
+    filters: {
+      search: {
+        placeholder: 'Search articles...'
+      },
+      categories: {
+        all: 'All categories'
+      },
+      viewMode: {
+        grid: 'Grid view',
+        list: 'List view'
+      },
+      clear: 'Clear filters',
+      results: {
+        found: 'articles found',
+        noResults: 'No articles found'
+      }
+    },
+    card: {
+      readMore: 'Read more',
+      readTime: 'min read',
+      publishedOn: 'Published on'
+    },
+    post: {
+      backToBlog: 'Back to Blog',
+      tableOfContents: 'Table of Contents',
+      publishedOn: 'Published on',
+      readTime: 'min read',
+      category: 'Category',
+      tags: 'Tags',
+      share: {
+        title: 'Share article',
+        twitter: 'Share on Twitter',
+        linkedin: 'Share on LinkedIn',
+        copy: 'Copy link'
+      },
+      relatedPosts: {
+        title: 'Related Articles',
+        subtitle: 'Other articles you might find interesting'
+      }
+    },
+    loading: 'Loading articles...',
+    loadMore: 'Load more articles',
+    error: {
+      title: 'Loading Error',
+      message: 'Could not load articles. Please try again.',
+      retry: 'Retry'
+    },
+    empty: {
+      title: 'No Articles',
+      message: 'No articles have been published yet. Come back soon for new content!'
+    },
+    states: {
+      loading: 'Loading articles...',
+      error: 'Error loading articles',
+      empty: 'No articles available',
+      postNotFound: 'Article not found',
+      postError: 'Error loading article'
+    },
+    categories: {
+      frontend: 'Frontend',
+      backend: 'Backend',
+      architecture: 'Architecture',
+      career: 'Career',
+      tutorials: 'Tutorials',
+      thoughts: 'Thoughts'
     }
   }
 }

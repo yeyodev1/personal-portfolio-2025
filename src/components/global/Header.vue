@@ -19,6 +19,7 @@ onMounted(() => {
       <nav class="header__nav">
         <a href="#projects">{{ t('nav.projects') }}</a>
         <a href="#about">{{ t('nav.about') }}</a>
+        <router-link to="/blog">{{ t('nav.blog') }}</router-link>
         <a href="#contact">{{ t('nav.contact') }}</a>
       </nav>
       
@@ -86,7 +87,7 @@ onMounted(() => {
   &__nav {
     display: none; // Oculto en mobile-first
 
-    a {
+    a, :deep(a) {
       margin: 0 1rem;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.85);
@@ -112,6 +113,14 @@ onMounted(() => {
 
       &:hover::after {
         width: 100%;
+      }
+      
+      &.router-link-active {
+        color: #4facfe;
+        
+        &::after {
+          width: 100%;
+        }
       }
     }
   }
