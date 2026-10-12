@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import CdnImg from '@/components/shared/CdnImg.vue'
 import { CATEGORIES, PROJECTS, categoryOf, projectImage, type Category } from '@/data/projects'
 
 export type Theme = 'stickers' | 'classic' | 'game'
@@ -47,13 +48,7 @@ const pick = (id: Category | 'all') => {
     <TransitionGroup tag="ul" name="px" class="px__grid">
       <li v-for="p in visible" :key="p.slug" class="px__card">
         <component :is="p.url ? 'a' : 'div'" :href="p.url" target="_blank" rel="noopener noreferrer" class="px__media">
-          <img
-            v-if="!broken.has(p.slug)"
-            :src="projectImage(p)"
-            :alt="p.name"
-            loading="lazy"
-            @error="broken.add(p.slug)"
-          />
+          <CdnImg v-if="!broken.has(p.slug)" :src="projectImage(p)" :width="480" :alt="p.name" @failed="broken.add(p.slug)" />
           <span v-else class="px__fallback" :style="{ '--cat': categoryOf(p).color }" aria-hidden="true">
             <i :class="categoryOf(p).icon" />
             <b>{{ p.name }}</b>
