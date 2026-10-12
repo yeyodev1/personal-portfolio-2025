@@ -133,7 +133,7 @@ const COMMANDS: Record<string, { hint: string; run: () => Line[] }> = {
       { type: 'out',     text: '  GitHub    : github.com/yeyodev1' },
       { type: 'out',     text: '  LinkedIn  : linkedin.com/in/yeyodev' },
       { type: 'blank',   text: '' },
-      { type: 'success', text: '  Ecuador 🇪🇨 · respond within a few hours' },
+      { type: 'success', text: '  Ecuador (EC) · respond within a few hours' },
       { type: 'out',     text: '  Available for projects · consulting · full-time' },
     ],
   },
@@ -371,28 +371,26 @@ onUnmounted(() => document.removeEventListener('keydown', onGlobalKey))
   align-items: center;
   gap: 0.45rem;
   padding: 0.55rem 1rem;
-  background: rgba(4, 4, 12, 0.85);
-  border: 1px solid $border-violet;
-  border-radius: 8px;
-  color: $accent-light;
-  font-family: 'Fira Code', 'Consolas', monospace;
+  background: $ink;
+  border: 2px solid $ink;
+  border-radius: 999px;
+  color: $green;
+  font-family: $font-mono;
   font-size: 0.78rem;
   cursor: pointer;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 4px 24px rgba(124, 58, 237, 0.15);
-  transition: all 0.25s ease;
+  box-shadow: 0 0 0 3px $paper, 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &:hover {
-    border-color: $accent-primary;
-    box-shadow: 0 4px 32px rgba(124, 58, 237, 0.35);
-    color: $text-primary;
-    .dt__trigger-bar { background: $accent-primary; }
+    transform: translateY(-2px) rotate(-2deg);
+    color: $yellow;
+    .dt__trigger-bar { background: $yellow; }
   }
 }
 
 .dt__trigger-icon {
   font-size: 0.9rem;
-  color: $accent-light;
+  color: inherit;
   transition: color 0.25s;
   .dt__trigger:hover & { color: $text-primary; }
 }
