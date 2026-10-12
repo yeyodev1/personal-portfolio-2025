@@ -99,7 +99,7 @@ const timelines = ['urgente', '1-mes', '1-3-meses', 'explorando']
                 :class="{ on: form.budget === b }"
                 @click="form.budget = form.budget === b ? '' : b"
               >
-                {{ t(`lead.budgetOptions.${b}`) }}
+                {{ t(`lead.budgetOptions.${b.replace(/\./g, '_')}`) }}
               </button>
             </div>
           </fieldset>

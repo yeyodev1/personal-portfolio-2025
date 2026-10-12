@@ -27,8 +27,8 @@ const es = {
     descriptionPh: 'Ej: recibo pedidos por WhatsApp y los anoto a mano. Quiero que se ordenen solos y ver cuánto vendo cada día.',
     budget: 'Presupuesto',
     budgetOptions: {
-      '800-1.5k': '$800 – $1.500',
-      '1.5k-3k': '$1.500 – $3k',
+      '800-1_5k': '$800 – $1.500',
+      '1_5k-3k': '$1.500 – $3k',
       '3k-8k': '$3k – $8k',
       '8k-mas': '$8k +',
     },
@@ -89,8 +89,8 @@ const en: typeof es = {
     descriptionPh: 'E.g. I take orders on WhatsApp and write them down by hand. I want them organized automatically and to see daily sales.',
     budget: 'Budget',
     budgetOptions: {
-      '800-1.5k': '$800 – $1,500',
-      '1.5k-3k': '$1,500 – $3k',
+      '800-1_5k': '$800 – $1,500',
+      '1_5k-3k': '$1,500 – $3k',
       '3k-8k': '$3k – $8k',
       '8k-mas': '$8k +',
     },
