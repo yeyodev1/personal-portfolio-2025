@@ -32,7 +32,9 @@ init()
           href="#contact"
           class="header__cta"
         >
-          {{ t('classic.nav.letsTalk') }}
+          <i class="fa-solid fa-comment-dots header__cta-icon" aria-hidden="true" />
+          <span class="header__cta-short">{{ t('classic.nav.letsTalkShort') }}</span>
+          <span class="header__cta-long">{{ t('classic.nav.letsTalk') }}</span>
         </a>
       </div>
     </div>
@@ -40,12 +42,22 @@ init()
 </template>
 
 <style lang="scss" scoped>
+// Mobile first: short CTA by default, the full sentence from tablet up.
+.header__cta-long { display: none; }
+.header__cta-icon { font-size: 0.85rem; }
+@media (min-width: 768px) {
+  .header__cta-short, .header__cta-icon { display: none; }
+  .header__cta-long { display: inline; }
+}
+
 .header {
   background: rgba(4, 4, 12, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   position: sticky;
+
+  @media (min-width: $breakpoint-md) { padding: 1rem 1.5rem; }
   top: 0;
   z-index: 100;
   border-bottom: 1px solid $border-subtle;
@@ -56,12 +68,16 @@ init()
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
+
+    @media (min-width: $breakpoint-md) { gap: 1rem; }
   }
 
   &__logo {
     font-family: $font-principal;
-    font-size: 1.4rem;
+    font-size: 1.15rem;
+
+    @media (min-width: $breakpoint-md) { font-size: 1.4rem; }
     font-weight: 700;
     color: $text-primary;
     text-decoration: none;
@@ -93,7 +109,10 @@ init()
   &__actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    min-width: 0;
+
+    @media (min-width: $breakpoint-md) { gap: 0.75rem; }
     flex-shrink: 0;
   }
 
@@ -117,6 +136,8 @@ init()
   }
 
   &__lang-track {
+    @media (max-width: #{$breakpoint-md - 1px}) { display: none; }
+
     position: relative;
     width: 28px;
     height: 16px;
@@ -158,13 +179,16 @@ init()
   }
 
   &__cta {
-    // Phones: a compact pill so the header never pushes past the screen edge.
-    @media (max-width: $breakpoint-sm) {
-      padding: 0.45rem 0.8rem !important;
-      font-size: 0.78rem !important;
-    }
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.82rem !important;
 
-    padding: 0.5rem 1.25rem;
+    @media (min-width: $breakpoint-md) {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.875rem !important;
+    }
     border-radius: 999px;
     background: $accent-primary;
     color: $text-primary;
