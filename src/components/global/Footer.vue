@@ -1,148 +1,62 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { SOCIALS } from '@/data/links'
+
 const { t } = useI18n()
 const currentYear = new Date().getFullYear()
 </script>
 
 <template>
   <footer class="footer">
-    <div class="footer__container">
-      <div class="footer__top">
-        <div class="footer__brand">
-          <span class="footer__logo">yeyo<span class="footer__dot">.</span>dev</span>
-          <p class="footer__tagline" style="white-space: pre-line">{{ t('footer.tagline') }}</p>
-        </div>
-        <div class="footer__links">
-          <a href="#projects">{{ t('footer.links.work') }}</a>
-          <a href="#services">{{ t('footer.links.services') }}</a>
-          <a href="#contact">{{ t('footer.links.contact') }}</a>
-          <a href="https://www.self.so/yeyodev" target="_blank" rel="noopener noreferrer">{{ t('footer.links.resume') }}</a>
-        </div>
-        <div class="footer__socials">
-          <a href="https://github.com/yeyodev1" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" /></a>
-          <a href="https://www.linkedin.com/in/yeyodev1" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin" /></a>
-          <a href="https://wa.me/17633524852" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" /></a>
-          <a href="https://www.instagram.com/yeyo.dev/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" /></a>
-          <a href="https://x.com/yeyodev" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter" /></a>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <p class="footer__copy">&copy; {{ currentYear }} Diego Reyes. {{ t('footer.copy') }}</p>
-        <p class="footer__built">{{ t('footer.built') }}</p>
-      </div>
+    <svg class="footer__big" viewBox="0 0 1000 118" aria-hidden="true">
+      <text x="0" y="104" textLength="1000" lengthAdjust="spacingAndGlyphs">{{ t('footer.big').toUpperCase() }}</text>
+    </svg>
+    <div class="footer__row mono">
+      <span>© {{ currentYear }} {{ t('footer.copy') }}</span>
+      <nav class="footer__group">
+        <a href="/muro#work">{{ t('nav.work') }}</a>
+        <a href="/muro#manifesto">{{ t('nav.manifesto') }}</a>
+        <RouterLink to="/blog">{{ t('nav.blog') }}</RouterLink>
+        <a href="/muro#contact">{{ t('nav.contact') }}</a>
+      </nav>
+      <nav class="footer__group">
+        <a v-for="s in SOCIALS" :key="s.label" :href="s.href" target="_blank" rel="noopener noreferrer">{{ s.label }}</a>
+      </nav>
+      <span>{{ t('footer.made') }}</span>
     </div>
   </footer>
 </template>
 
 <style lang="scss" scoped>
-
-
 .footer {
-  background: $bg-deep;
-  border-top: 1px solid $border-subtle;
-  padding: 4rem 1.5rem 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem 1rem 7rem;
 
-  &__container {
-    max-width: 1100px;
-    margin: 0 auto;
+  @media (min-width: $breakpoint-md) { padding: 1rem 2rem 7rem; }
+
+  &__big {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.25rem;
+
+    text { font-family: $font-display; font-size: 128px; fill: $ink; }
   }
 
-  &__top {
+  &__row {
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid $border-subtle;
-    margin-bottom: 2rem;
-
-    @media (min-width: $breakpoint-md) {
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-  }
-
-  &__brand {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  &__logo {
-    font-family: $font-principal;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: $text-primary;
-  }
-
-  &__dot {
-    color: $accent-primary;
-  }
-
-  &__tagline {
-    font-size: 0.875rem;
-    color: $text-muted;
-    line-height: 1.6;
-  }
-
-  &__links {
-    display: flex;
-    gap: 1.5rem;
     flex-wrap: wrap;
-    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    border-top: 2px solid $ink;
+    border-bottom: 2px solid $ink;
+    padding: 1.1rem 0;
+    font-size: 0.72rem;
 
-    a {
-      font-size: 0.875rem;
-      color: $text-secondary;
-      font-family: 'Roboto', sans-serif;
-      transition: color 0.2s ease;
-
-      &:hover { color: $text-primary; }
-    }
+    a:hover { text-decoration: underline; }
   }
 
-  &__socials {
-    display: flex;
-    gap: 0.75rem;
-
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: $bg-secondary;
-      border: 1px solid $border-subtle;
-      font-size: 1rem;
-      color: $text-secondary;
-      transition: all 0.25s ease;
-
-      &:hover {
-        border-color: $border-violet;
-        color: $accent-light;
-        transform: translateY(-2px);
-      }
-    }
-  }
-
-  &__bottom {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
-
-    @media (min-width: $breakpoint-md) {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-  }
-
-  &__copy,
-  &__built {
-    font-size: 0.8rem;
-    color: $text-muted;
-  }
+  &__group { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
 }
 </style>
