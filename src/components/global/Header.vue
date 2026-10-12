@@ -29,7 +29,10 @@ init()
         <a href="/muro#projects" class="pill-btn pill-btn--orange header__work">
           <span class="header__play" aria-hidden="true">↓</span>{{ t('nav.seeWork') }}
         </a>
-        <a href="/muro#contact" class="pill-btn pill-btn--ink">{{ t('nav.sayHello') }}</a>
+        <a href="/muro#contact" class="pill-btn pill-btn--ink header__talk">
+          <span class="header__talk-short">{{ t('nav.sayHelloShort') }}</span>
+          <span class="header__talk-long">{{ t('nav.sayHello') }}</span>
+        </a>
       </div>
     </div>
   </header>
@@ -123,5 +126,18 @@ init()
   }
 
   .pill-btn { padding: 0.55rem 1.1rem; white-space: nowrap; }
+
+  // Mobile first: short label on phones, full sentence from 480px.
+  &__talk-long { display: none; }
+  @media (min-width: $breakpoint-sm) {
+    &__talk-short { display: none; }
+    &__talk-long { display: inline; }
+  }
+
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    &__actions { gap: 0.4rem; }
+    &__lang { width: 2.3rem; height: 2.3rem; }
+    .pill-btn { padding: 0.5rem 0.85rem; font-size: 0.9rem; }
+  }
 }
 </style>
