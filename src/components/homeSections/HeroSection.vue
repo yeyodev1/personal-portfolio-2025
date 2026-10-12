@@ -1,453 +1,168 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import GooeyText from '@/components/ui/GooeyText.vue'
-import TextShimmer from '@/components/ui/TextShimmer.vue'
-import SplineScene from '@/components/ui/SplineScene.vue'
-import { useGithub } from '@/composables/useGithub'
+import { vSticker } from '@/composables/useStickers'
 
-const { t, locale } = useI18n()
-const isLoaded = ref(false)
-const mouseX = ref(0)
-const mouseY = ref(0)
-const heroRef   = ref<HTMLElement | null>(null)
-const visualRef = ref<HTMLElement | null>(null)
-const glowX = ref(50)
-const glowY = ref(50)
-
-const { totalCommits, load: loadGithub } = useGithub()
-
-const roles = computed(() =>
-  locale.value === 'es'
-    ? ['Full Stack Dev', 'CTO @ Bakano', 'Experto Vue.js', 'Entrenador IA', 'Arquitecto Tech']
-    : ['Full Stack Dev', 'CTO @ Bakano', 'Vue.js Expert', 'AI Trainer', 'Tech Architect']
-)
-
-const stats = computed(() => [
-  { value: '6+', label: t('hero.stats.years') },
-  {
-    value: totalCommits.value > 0
-      ? totalCommits.value >= 1000
-        ? `${(totalCommits.value / 1000).toFixed(1)}K`
-        : String(totalCommits.value)
-      : '3.4K',
-    label: t('hero.stats.commits'),
-  },
-  { value: '4', label: t('hero.stats.countries') },
-  { value: '15+', label: t('hero.stats.projects') },
-])
-
-const handleMouseMove = (e: MouseEvent) => {
-  const rect = heroRef.value?.getBoundingClientRect()
-  if (!rect) return
-  mouseX.value = (e.clientX - rect.left) / rect.width - 0.5
-  mouseY.value = (e.clientY - rect.top) / rect.height - 0.5
-}
-
-const handleGlobalMouse = (e: MouseEvent) => {
-  const rect = visualRef.value?.getBoundingClientRect()
-  if (!rect) return
-  glowX.value = ((e.clientX - rect.left) / rect.width)  * 100
-  glowY.value = ((e.clientY - rect.top)  / rect.height) * 100
-}
-
-onMounted(() => {
-  setTimeout(() => (isLoaded.value = true), 100)
-  heroRef.value?.addEventListener('mousemove', handleMouseMove)
-  window.addEventListener('mousemove', handleGlobalMouse, { passive: true })
-  loadGithub()
-})
-
-onUnmounted(() => {
-  heroRef.value?.removeEventListener('mousemove', handleMouseMove)
-  window.removeEventListener('mousemove', handleGlobalMouse)
-})
+const { t, tm } = useI18n()
+const eyebrow = computed(() => tm('hero.eyebrow') as string[])
+const facts = computed(() => tm('hero.facts') as string[])
+const factColors = ['yellow', 'green', 'pink', 'blue']
 </script>
 
 <template>
-  <section ref="heroRef" class="hero" :class="{ 'hero--loaded': isLoaded }">
-    <div class="hero__grid" />
-    <div
-      class="hero__glow hero__glow--violet"
-      :style="{ transform: `translate(${mouseX * 40}px, ${mouseY * 40}px)` }"
-    />
-    <div
-      class="hero__glow hero__glow--cyan"
-      :style="{ transform: `translate(${mouseX * -25}px, ${mouseY * -25}px)` }"
-    />
-    <div ref="visualRef" class="hero__visual">
-      <div class="hero__robot-glow" :style="{ '--gx': glowX + '%', '--gy': glowY + '%' }" />
-      <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" class="hero__spline" />
-    </div>
-    <div class="hero__container">
-      <div class="hero__content">
-        <div class="hero__shimmer-wrap">
-          <TextShimmer :text="t('hero.available')" :duration="2.5" class="hero__shimmer" />
-        </div>
-        <p class="hero__greeting">{{ t('hero.greeting') }}</p>
-        <h1 class="hero__name">Diego Reyes</h1>
-        <p class="hero__alias">{{ t('hero.alias') }} <span>Yeyo</span></p>
-        <div class="hero__role-wrap">
-          <GooeyText :texts="roles" :morph-time="1.2" :cooldown-time="2" class="hero__gooey" text-class="hero__gooey-text" />
-        </div>
-        <p class="hero__desc" v-html="t('hero.desc')" />
-        <div class="hero__actions">
-          <a href="#projects" class="hero__btn hero__btn--primary">
-            {{ t('hero.seeWork') }}
-            <span class="hero__btn-arrow">→</span>
-          </a>
-          <a href="https://wa.me/17633524852" target="_blank" rel="noopener noreferrer" class="hero__btn hero__btn--secondary">
-            {{ t('hero.letsTalk') }}
-          </a>
-        </div>
-        <div class="hero__stats">
-          <div v-for="stat in stats" :key="stat.label" class="hero__stat">
-            <span class="hero__stat-value">{{ stat.value }}</span>
-            <span class="hero__stat-label">{{ stat.label }}</span>
-          </div>
-        </div>
+  <section class="hero">
+    <p class="hero__eyebrow mono">
+      <template v-for="(item, i) in eyebrow" :key="item">
+        <span v-if="i" class="hero__dot">•</span>{{ item }}
+      </template>
+    </p>
+
+    <h1 class="hero__title">
+      <span class="hero__top">{{ t('hero.titleTop') }}</span>
+      <span class="hero__sticker-row">
+        <span v-sticker="-2" class="hero__sticker">{{ t('hero.titleSticker') }}</span>
+        <span class="hero__note" aria-hidden="true">
+          {{ t('hero.note') }}
+          <svg viewBox="0 0 60 50" class="hero__arrow">
+            <path d="M52 4 C 50 30, 30 40, 8 38" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+            <path d="M16 30 L 6 38 L 17 45" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </span>
+    </h1>
+
+    <div class="hero__bottom">
+      <p class="hero__lead">{{ t('hero.lead') }}</p>
+      <div class="hero__ctas">
+        <a href="#projects" class="pill-btn pill-btn--orange hero__cta">↓ {{ t('hero.seeWork') }}</a>
+        <a href="#contact" class="pill-btn pill-btn--ink hero__cta">{{ t('hero.whatsapp') }} →</a>
       </div>
     </div>
-    <div class="hero__scroll">
-      <span>Scroll</span>
-      <div class="hero__scroll-line" />
-    </div>
+
+    <ul class="hero__facts">
+      <li
+        v-for="(fact, i) in facts"
+        :key="fact"
+        v-sticker="i % 2 ? 3 : -3"
+        class="hero__fact"
+        :class="`hero__fact--${factColors[i]}`"
+      >
+        {{ fact }}
+      </li>
+    </ul>
   </section>
 </template>
 
 <style lang="scss" scoped>
-
-
-// ── Animations ──────────────────────────────────────────────────────────────
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fade-left {
-  from { opacity: 0; transform: translateX(-30px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes fade-right {
-  from { opacity: 0; transform: translateX(30px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50%       { opacity: 0.8; transform: scale(1.05); }
-}
-@keyframes scroll-bounce {
-  0%, 100% { transform: scaleY(1); opacity: 0.4; }
-  50%       { transform: scaleY(1.6); opacity: 1; }
-}
-@keyframes spin-slow {
-  to { transform: rotate(360deg); }
-}
-
-// ── Section ─────────────────────────────────────────────────────────────────
 .hero {
-  position: relative;
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: $bg-deep;
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
 
-  &--loaded { opacity: 1; }
+  @media (min-width: $breakpoint-md) { padding: 4rem 2rem 5rem; }
 
-  // Grid background
-  &__grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient($border-subtle 1px, transparent 1px),
-      linear-gradient(90deg, $border-subtle 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  &__eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.9rem;
+    margin-bottom: 1.5rem;
   }
 
-  // Radial glows
-  &__glow {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    transition: transform 0.15s ease-out;
+  &__dot { color: $orange; margin-right: 0.9rem; }
 
-    &--violet {
-      width: clamp(400px, 50vw, 700px);
-      height: clamp(400px, 50vw, 700px);
-      top: -10%;
-      right: -5%;
-      background: radial-gradient(circle, rgba(124, 58, 237, 0.18) 0%, transparent 70%);
-      animation: pulse-glow 6s ease-in-out infinite;
-    }
-
-    &--cyan {
-      width: clamp(300px, 40vw, 500px);
-      height: clamp(300px, 40vw, 500px);
-      bottom: 10%;
-      left: 5%;
-      background: radial-gradient(circle, rgba(6, 214, 160, 0.1) 0%, transparent 70%);
-      animation: pulse-glow 8s ease-in-out infinite 2s;
-    }
+  &__title {
+    font-size: clamp(2.7rem, 8vw, 7.4rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
   }
 
-  // ── Container — only holds text content, floats above robot ─────────────
-  &__container {
+  &__top { display: block; max-width: 14ch; }
+
+  &__sticker-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2.5rem;
+    margin-top: 0.15em;
+  }
+
+  &__sticker {
+    display: inline-block;
+    background: $orange;
+    padding: 0.08em 0.25em 0.14em;
+    border-radius: 0.18em;
+    box-shadow: 0 0 0 0.09em $paper, 0 0 0 calc(0.09em + 1px) #d9d9d9, 0 10px 24px rgba(0, 0, 0, 0.12);
     position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 720px;           // constrain text to left half
-    padding: 6rem 1.5rem 4rem;
-    display: flex;
-    flex-direction: column;
 
-    @media (min-width: $breakpoint-md) {
-      padding: 0 2rem 0 3rem;
-      justify-content: center;
-      min-height: 100svh;
-    }
-
-    @media (min-width: $breakpoint-lg) {
-      padding: 0 2rem 0 4rem;
+    // peeled corner
+    &::after {
+      content: '';
+      position: absolute;
+      right: -0.04em;
+      bottom: -0.04em;
+      width: 0.4em;
+      height: 0.4em;
+      background: linear-gradient(135deg, #e86a10 50%, #f6f0e6 50%);
+      border-radius: 0 0 0.18em 0;
+      box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.12);
     }
   }
 
-  // ── Left content ──────────────────────────────────────────────────────────
-  &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-
-    @media (min-width: $breakpoint-md) {
-      animation: fade-left 0.9s ease-out 0.2s both;
-    }
-  }
-
-  &__shimmer-wrap {
-    animation: fade-up 0.8s ease-out 0.1s both;
-  }
-
-  &__shimmer {
-    font-size: 0.85rem;
-    font-family: 'Roboto', monospace;
-    letter-spacing: 0.04em;
-  }
-
-  &__greeting {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: $text-secondary;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    animation: fade-up 0.8s ease-out 0.25s both;
-  }
-
-  &__name {
-    font-size: clamp(2.8rem, 8vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1;
-    background: linear-gradient(135deg, $text-primary 0%, $accent-light 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: fade-up 0.9s ease-out 0.35s both;
-  }
-
-  &__alias {
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    color: $text-muted;
-    font-family: 'Roboto', monospace;
-    animation: fade-up 0.8s ease-out 0.4s both;
-
-    span {
-      color: $accent-cyan;
-      font-weight: 600;
-    }
-  }
-
-  // Gooey role
-  &__role-wrap {
-    height: 3.5rem;
-    animation: fade-up 0.8s ease-out 0.5s both;
-  }
-
-  &__gooey {
-    height: 3.5rem;
-  }
-
-  :deep(.hero__gooey-text) {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
-    font-weight: 700;
-    color: $accent-primary;
-    background: linear-gradient(135deg, $accent-primary, $accent-cyan);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-family: 'Bitcount', sans-serif;
-  }
-
-  &__desc {
-    max-width: 540px;
-    font-size: clamp(0.95rem, 2vw, 1.05rem);
-    color: $text-secondary;
-    line-height: 1.75;
-    animation: fade-up 0.8s ease-out 0.6s both;
-
-    strong {
-      color: $text-primary;
-      font-weight: 600;
-    }
-  }
-
-  // CTAs
-  &__actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    animation: fade-up 0.8s ease-out 0.7s both;
-  }
-
-  &__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    font-family: 'Roboto', sans-serif;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
-
-    &--primary {
-      background: $accent-primary;
-      color: $text-primary;
-      box-shadow: 0 0 24px $accent-glow;
-
-      &:hover {
-        background: $accent-light;
-        box-shadow: 0 0 40px $accent-glow;
-        transform: translateY(-2px);
-
-        .hero__btn-arrow { transform: translateX(4px); }
-      }
-    }
-
-    &--secondary {
-      background: transparent;
-      color: $text-primary;
-      border: 1px solid $border-white;
-      backdrop-filter: blur(10px);
-
-      &:hover {
-        border-color: $accent-light;
-        color: $accent-light;
-        transform: translateY(-2px);
-      }
-    }
-  }
-
-  &__btn-arrow {
-    transition: transform 0.3s ease;
-  }
-
-  // Stats
-  &__stats {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    animation: fade-up 0.8s ease-out 0.85s both;
-  }
-
-  &__stat {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  &__stat-value {
+  &__note {
+    display: none;
+    font-family: $font-hand;
     font-size: 1.5rem;
-    font-weight: 800;
-    color: $text-primary;
-    font-family: 'Bitcount', sans-serif;
     line-height: 1;
-  }
-
-  &__stat-label {
-    font-size: 0.75rem;
-    color: $text-muted;
+    color: $blue;
+    transform: rotate(-6deg);
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.02em;
+
+    @media (min-width: $breakpoint-lg) { display: flex; flex-direction: column; align-items: flex-start; }
   }
 
-  // ── Robot visual — covers the entire hero section ────────────────────────
-  &__visual {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
+  &__arrow { width: 70px; margin-top: 0.3rem; }
 
-    @media (max-width: #{$breakpoint-md - 1px}) {
-      opacity: 0.35;   // subtle on mobile so text stays readable
-    }
-  }
-
-  // Mouse-following glow that follows the cursor anywhere in the hero
-  &__robot-glow {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(
-      circle 480px at var(--gx, 60%) var(--gy, 50%),
-      rgba(124, 58, 237, 0.30) 0%,
-      rgba(6, 214, 160, 0.10) 45%,
-      transparent 70%
-    );
-  }
-
-  &__spline {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: auto;   // Spline still gets mouse events for head tracking
-  }
-
-  // ── Scroll indicator ──────────────────────────────────────────────────────
-  &__scroll {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+  &__bottom {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    z-index: 5;
-    animation: fade-up 1s ease-out 1.5s both;
-
-    span {
-      font-size: 0.7rem;
-      color: $text-muted;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 1.75rem 3rem;
+    margin-top: 2.5rem;
   }
 
-  &__scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient($accent-primary, transparent);
-    animation: scroll-bounce 1.8s ease-in-out infinite;
-    transform-origin: top;
+  &__lead {
+    max-width: 36rem;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    line-height: 1.35;
+  }
+
+  &__ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+  &__cta { font-size: 1.1rem; padding: 0.85rem 1.5rem; }
+
+  &__facts {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2.75rem;
+  }
+
+  &__fact {
+    font-family: $font-mono;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    border: 2px solid $paper;
+    box-shadow: 0 0 0 1px #ddd, 0 6px 14px rgba(0, 0, 0, 0.08);
+
+    &--yellow { background: $yellow; }
+    &--green { background: $green; }
+    &--pink { background: $pink; }
+    &--blue { background: $blue; color: $paper; }
   }
 }
 </style>
