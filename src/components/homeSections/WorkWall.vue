@@ -443,7 +443,7 @@ $sticker-edge: 0 0 0 3px $paper, 0 0 0 4px #dcdcdc, 0 8px 18px rgba(0, 0, 0, 0.1
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 150px;
+  min-width: min(150px, 100%);
   padding: 1rem 1.4rem;
   border-radius: 999px;
   box-shadow: $sticker-edge;
