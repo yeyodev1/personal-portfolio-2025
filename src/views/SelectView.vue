@@ -8,6 +8,9 @@ import { WHATSAPP } from '@/data/links'
 import { STATS } from '@/data/projects'
 import { useLostVisitor } from '@/composables/useLostVisitor'
 import SelectGuide from '@/components/select/SelectGuide.vue'
+import { preloadFonts, preloadImages, usePagePreload } from '@/composables/usePreloader'
+import { cdn } from '@/data/cdn'
+import CdnImg from '@/components/shared/CdnImg.vue'
 
 const router = useRouter()
 const { t } = useI18n()
@@ -20,6 +23,12 @@ const versions: { id: Version; cover: string; color: string; stats: [number, num
   { id: 'mundo', cover: '/game/cover-mundo.jpg', color: '#46a8a8', stats: [5, 2, 5] },
 ]
 const statKeys = ['vibe', 'speed', 'fun'] as const
+
+const preload = usePagePreload('arcade')
+preload.add(
+  ...preloadFonts(['Press Start 2P', 'Bowlby One', 'Instrument Sans']),
+  ...preloadImages([...versions.map((v) => cdn(v.cover, 260)), cdn('/game/yeyo.jpg', 64)]),
+)
 
 const last = lastVersion()
 const active = ref(Math.max(0, versions.findIndex((v) => v.id === (last ?? 'mundo'))))
@@ -148,7 +157,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
         <div class="cart__shell">
           <div class="cart__ridges" aria-hidden="true"><span v-for="n in 6" :key="n" /></div>
           <div class="cart__label">
-            <img :src="v.cover" :alt="t(`select.versions.${v.id}.name`)" />
+            <CdnImg :src="v.cover" :width="260" :alt="t(`select.versions.${v.id}.name`)" eager />
             <div class="cart__name">
               <strong>{{ t(`select.versions.${v.id}.name`) }}</strong>
               <span>{{ t(`select.versions.${v.id}.genre`) }}</span>
