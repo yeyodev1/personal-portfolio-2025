@@ -8,6 +8,13 @@ import ClassicProcessSection from './ClassicProcessSection.vue'
 import ClassicContactSection from './ClassicContactSection.vue'
 import ClassicFooter from './ClassicFooter.vue'
 import DevTerminal from '@/components/base/DevTerminal.vue'
+import { preloadFonts, preloadImages, resetSignal, usePagePreload, waitForSignal } from '@/composables/usePreloader'
+import diegoPhoto from '@/assets/fotos/diego.jpg'
+
+// The 3D robot is the slow part: wait for the Spline scene so the hero never shows up empty.
+resetSignal('spline')
+const preload = usePagePreload('classic')
+preload.add(...preloadFonts(['Bitcount', 'Roboto']), ...preloadImages([diegoPhoto]), waitForSignal('spline'))
 </script>
 
 <template>
