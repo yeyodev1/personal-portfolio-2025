@@ -7,6 +7,7 @@ const es = {
     process: 'Cómo trabajo',
     contact: 'Contacto',
     letsTalk: 'Cuéntame tu idea →',
+    letsTalkShort: 'Hablemos',
   },
   hero: {
     available: 'Apps y automatizaciones para dueños de negocio · Ecuador y LatAm',
@@ -85,6 +86,7 @@ const en: typeof es = {
     process: 'How I work',
     contact: 'Contact',
     letsTalk: 'Tell me your idea →',
+    letsTalkShort: "Let's talk",
   },
   hero: {
     available: 'Apps & automations for business owners · Ecuador & LatAm',
