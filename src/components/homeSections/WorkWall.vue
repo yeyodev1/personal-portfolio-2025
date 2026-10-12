@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { vSticker } from '@/composables/useStickers'
+import CdnImg from '@/components/shared/CdnImg.vue'
 import { INSTAGRAM, WHATSAPP } from '@/data/links'
 import diegoPhoto from '@/assets/fotos/diego.jpg'
 import yoPhoto from '@/assets/fotos/yo.jpg'
@@ -28,7 +29,7 @@ const bolonChat = computed(() => tm('wall.cases.bolon.chat') as string[])
       <!-- No. 01 · Courier Box -->
       <a href="https://courierboxlogistics.com" target="_blank" rel="noopener noreferrer" class="case case--big">
         <span class="case__no mono">No. 01</span>
-        <img src="/work/courierbox.jpg" alt="courierboxlogistics.com" class="case__img" loading="lazy" />
+        <CdnImg src="/work/courierbox.jpg" :width="720" alt="courierboxlogistics.com" class="case__img" />
         <div class="case__label">
           <span class="mono">{{ t('wall.cases.courier.label') }}</span>
           <h3>{{ t('wall.cases.courier.title') }}</h3>
@@ -69,7 +70,7 @@ const bolonChat = computed(() => tm('wall.cases.bolon.chat') as string[])
             <span class="mono">0{{ i + 1 }}</span>{{ step }}
           </li>
         </ol>
-        <span class="case__inset"><img src="/work/nicole-pastry-arts.jpg" alt="" /></span>
+        <span class="case__inset"><CdnImg src="/work/nicole-pastry-arts.jpg" :width="320" /></span>
         <div class="case__label">
           <span class="mono">{{ t('wall.cases.nicole.label') }}</span>
           <h3>{{ t('wall.cases.nicole.title') }}</h3>
@@ -146,7 +147,7 @@ const bolonChat = computed(() => tm('wall.cases.bolon.chat') as string[])
       <!-- No. 04 · Ponce's Rent a Car -->
       <a href="https://poncesrentacar.com.ec" target="_blank" rel="noopener noreferrer" class="case case--big">
         <span class="case__no mono">No. 04</span>
-        <img src="/work/ponce-rent-a-car.jpg" alt="poncesrentacar.com.ec" class="case__img" loading="lazy" />
+        <CdnImg src="/work/ponce-rent-a-car.jpg" :width="720" alt="poncesrentacar.com.ec" class="case__img" />
         <div class="case__label">
           <span class="mono">{{ t('wall.cases.ponce.label') }}</span>
           <h3>{{ t('wall.cases.ponce.title') }}</h3>
