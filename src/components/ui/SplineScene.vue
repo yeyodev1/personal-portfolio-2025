@@ -6,6 +6,8 @@ import { sendSignal } from '@/composables/usePreloader'
 interface Props {
   scene: string
   class?: string
+  /** Relay the cursor from anywhere on the page so the robot keeps looking at it. */
+  followPointer?: boolean
 }
 
 const props = defineProps<Props>()
@@ -13,6 +15,22 @@ const canvas = ref<HTMLCanvasElement | null>(null)
 const isLoaded = ref(false)
 let app: Application | null = null
 let rafFrame: number | null = null
+
+// Spline only tracks pointers that hit its own canvas. We listen to `mousemove` on the
+// document and re-dispatch it as `pointermove` on the canvas (different event types, so
+// the relayed event never loops back). The page is mapped onto the canvas: horizontal
+// follows the cursor fully, vertical stays in a gentle band so the robot never stares
+// at the ceiling or the floor.
+const relay = (e: MouseEvent) => {
+  const c = canvas.value
+  if (!c) return
+  const rect = c.getBoundingClientRect()
+  const x = rect.left + (e.clientX / window.innerWidth) * rect.width
+  const y = rect.top + rect.height * (0.3 + 0.4 * (e.clientY / window.innerHeight))
+  c.dispatchEvent(
+    new PointerEvent('pointermove', { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerType: 'mouse', isPrimary: true }),
+  )
+}
 
 // Force WebGL clear-color to transparent on every frame.
 // CSS `background: transparent` can't affect the WebGL clear-color —
@@ -31,6 +49,7 @@ onMounted(async () => {
     await app.load(props.scene)
     forceTransparentBg(canvas.value)
     isLoaded.value = true
+    if (props.followPointer) document.addEventListener('mousemove', relay, { passive: true })
   } catch (e) {
     console.error('[SplineScene] failed to load scene', e)
   } finally {
@@ -39,6 +58,7 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
+  document.removeEventListener('mousemove', relay)
   if (rafFrame !== null) cancelAnimationFrame(rafFrame)
   app?.dispose()
 })
