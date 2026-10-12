@@ -32,7 +32,7 @@ export function useLead(source: string) {
 
   const submit = async () => {
     if (status.value === 'sending') return
-    // Qualify before sending: projects start at $800.
+    // Qualify before sending: projects start at $500.
     if (!form.budget || !form.acceptsMinimum) {
       error.value = t(!form.budget ? 'lead.budgetRequired' : 'lead.acceptRequired')
       status.value = 'error'
