@@ -39,6 +39,8 @@ preload.add(...preloadFonts(['Bitcount', 'Roboto']), ...preloadImages([diegoPhot
 // The original dark theme, scoped to this version so the other worlds stay untouched.
 .classic {
   min-height: 100vh;
+  // Decorative glows may bleed past the edges; never let them create a sideways scroll.
+  overflow-x: clip;
   background-color: $bg-deep;
   color: $text-primary;
   font-family: 'Roboto', sans-serif;
