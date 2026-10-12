@@ -21,7 +21,7 @@ const needs: { id: Need; icon: string; color: string }[] = [
   { id: 'integracion', icon: 'fa-solid fa-plug', color: '#f59e0b' },
   { id: 'otro', icon: 'fa-solid fa-lightbulb', color: '#eab308' },
 ]
-const budgets = ['800-1.5k', '1.5k-3k', '3k-8k', '8k-mas']
+const budgets = ['500-1.5k', '1.5k-3k', '3k-8k', '8k-mas']
 const timelines = ['urgente', '1-mes', '1-3-meses', 'explorando']
 </script>
 
