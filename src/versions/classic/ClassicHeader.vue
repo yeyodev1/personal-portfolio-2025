@@ -158,6 +158,12 @@ init()
   }
 
   &__cta {
+    // Phones: a compact pill so the header never pushes past the screen edge.
+    @media (max-width: $breakpoint-sm) {
+      padding: 0.45rem 0.8rem !important;
+      font-size: 0.78rem !important;
+    }
+
     padding: 0.5rem 1.25rem;
     border-radius: 999px;
     background: $accent-primary;
