@@ -13,8 +13,6 @@ const mouseX = ref(0)
 const mouseY = ref(0)
 const heroRef   = ref<HTMLElement | null>(null)
 const visualRef = ref<HTMLElement | null>(null)
-const glowX = ref(50)
-const glowY = ref(50)
 
 const roles = computed(() =>
   locale.value === 'es'
@@ -36,22 +34,13 @@ const handleMouseMove = (e: MouseEvent) => {
   mouseY.value = (e.clientY - rect.top) / rect.height - 0.5
 }
 
-const handleGlobalMouse = (e: MouseEvent) => {
-  const rect = visualRef.value?.getBoundingClientRect()
-  if (!rect) return
-  glowX.value = ((e.clientX - rect.left) / rect.width)  * 100
-  glowY.value = ((e.clientY - rect.top)  / rect.height) * 100
-}
-
 onMounted(() => {
   setTimeout(() => (isLoaded.value = true), 100)
   heroRef.value?.addEventListener('mousemove', handleMouseMove)
-  window.addEventListener('mousemove', handleGlobalMouse, { passive: true })
 })
 
 onUnmounted(() => {
   heroRef.value?.removeEventListener('mousemove', handleMouseMove)
-  window.removeEventListener('mousemove', handleGlobalMouse)
 })
 </script>
 
@@ -67,8 +56,7 @@ onUnmounted(() => {
       :style="{ transform: `translate(${mouseX * -25}px, ${mouseY * -25}px)` }"
     />
     <div ref="visualRef" class="hero__visual">
-      <div class="hero__robot-glow" :style="{ '--gx': glowX + '%', '--gy': glowY + '%' }" />
-      <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" class="hero__spline" />
+      <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" class="hero__spline" follow-pointer />
     </div>
     <div class="hero__container">
       <div class="hero__content">
@@ -271,8 +259,14 @@ onUnmounted(() => {
     height: 3.5rem;
   }
 
+  // Long roles ("Bots de WhatsApp con IA") must grow to the right, not spill off the left edge.
+  :deep(.gooey-inner) { justify-content: flex-start; }
+
   :deep(.hero__gooey-text) {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    left: 0;
+    text-align: left;
+    white-space: nowrap;
+    font-size: clamp(1.1rem, 5.2vw, 2.2rem);
     font-weight: 700;
     color: $accent-primary;
     background: linear-gradient(135deg, $accent-primary, $accent-cyan);
@@ -391,11 +385,6 @@ onUnmounted(() => {
       opacity: 0.35;   // subtle on mobile so text stays readable
     }
 
-    // Robot lives on the right so it never sits behind the copy.
-    @media (min-width: $breakpoint-lg) {
-      left: 40%;
-      width: 60%;
-    }
   }
 
   &__wa {
@@ -407,24 +396,16 @@ onUnmounted(() => {
     text-underline-offset: 4px;
   }
 
-  // Mouse-following glow that follows the cursor anywhere in the hero
-  &__robot-glow {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(
-      circle 480px at var(--gx, 60%) var(--gy, 50%),
-      rgba(124, 58, 237, 0.30) 0%,
-      rgba(6, 214, 160, 0.10) 45%,
-      transparent 70%
-    );
-  }
 
   &__spline {
     position: absolute;
     inset: 0;
     z-index: 1;
+
+    // Only the robot moves right (the glow stays full width, so there is no visible seam).
+    @media (min-width: $breakpoint-lg) {
+      left: 38%;
+    }
     pointer-events: auto;   // Spline still gets mouse events for head tracking
   }
 
