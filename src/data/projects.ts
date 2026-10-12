@@ -1,5 +1,5 @@
 // Every client project, grouped by the business problem it solves.
-// Screenshots live in /public/work/<slug>.jpg.
+// Screenshots live in /public/work/<slug>.jpg and are mirrored on Cloudinary (see data/cdn.ts).
 
 export type Category = 'sistema' | 'automatizacion' | 'tienda' | 'cursos' | 'web'
 
