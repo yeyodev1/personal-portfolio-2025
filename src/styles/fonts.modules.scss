@@ -1,14 +1,9 @@
-// Importación de fuentes de Google
-@use 'sass:string';
+// Variables de fuentes (las fuentes se cargan en global.scss)
+$font-display: 'Bowlby One', 'Arial Black', Impact, sans-serif;
+$font-body: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+$font-mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+$font-hand: 'Permanent Marker', 'Comic Sans MS', cursive;
 
-// Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
-// Variables de fuentes
-:root {
-  --font-bitcount: 'Bitcount', sans-serif;
-  --font-roboto: 'Roboto', sans-serif;
-}
-
+// Legacy (blog y versión clásica)
 $font-principal: 'Bitcount', sans-serif;
 $font-secondary: 'Roboto', sans-serif;
