@@ -10,8 +10,52 @@
     <meta name="theme-color" content="#ffe14d">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+    <!-- Loading screen styles live inline so it paints before any JS or CSS bundle arrives. -->
+    <style>
+      #boot {
+        --boot-bg: #0b0a1a; --boot-ink: #ffffff; --boot-accent: #ffe14d; --boot-track: rgba(255,255,255,.15);
+        position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center;
+        background: var(--boot-bg); color: var(--boot-ink);
+        font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+        transition: opacity .45s ease, visibility .45s ease;
+      }
+      #boot[data-theme="classic"] { --boot-bg: #04040c; --boot-accent: #7c3aed; --boot-track: rgba(124,58,237,.2); }
+      #boot[data-theme="muro"] { --boot-bg: #ffffff; --boot-ink: #0d0d0d; --boot-accent: #ff7a1a; --boot-track: #f3ecdc; }
+      #boot[data-theme="mundo"] { --boot-bg: #469eaa; --boot-ink: #f4efe1; --boot-accent: #e9b949; --boot-track: rgba(31,42,44,.25); }
+      #boot[data-theme="plain"] { --boot-bg: #ffffff; --boot-ink: #0d0d0d; --boot-accent: #ffe14d; --boot-track: #eee; }
+      #boot.boot--done { opacity: 0; visibility: hidden; pointer-events: none; }
+      .boot__box { width: min(320px, 80vw); text-align: center; }
+      .boot__logo {
+        font-size: clamp(2rem, 9vw, 3rem); letter-spacing: -.02em; line-height: 1;
+        color: #ffe14d; -webkit-text-stroke: 2px #000; paint-order: stroke fill; text-shadow: 3px 3px 0 #000;
+        animation: boot-bob 1.4s ease-in-out infinite;
+      }
+      .boot__bar { margin: 1.6rem 0 .8rem; height: 14px; border: 3px solid currentColor; border-radius: 999px; background: var(--boot-track); overflow: hidden; }
+      .boot__fill { height: 100%; width: var(--boot-progress, 6%); min-width: 6%; background: var(--boot-accent); border-radius: 999px; transition: width .3s ease; }
+      .boot__meta { display: flex; justify-content: space-between; font: 600 .8rem/1 ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; opacity: .8; }
+      .boot__dots::after { content: ""; animation: boot-dots 1.2s steps(4) infinite; }
+      @keyframes boot-bob { 50% { transform: translateY(-6px) rotate(-2deg); } }
+      @keyframes boot-dots { 0% { content: ""; } 25% { content: "."; } 50% { content: ".."; } 75% { content: "..."; } }
+      @media (prefers-reduced-motion: reduce) { .boot__logo, .boot__dots::after { animation: none; } }
+    </style>
   </head>
   <body>
+    <div id="boot" role="status" aria-live="polite">
+      <div class="boot__box">
+        <div class="boot__logo">YEYO.DEV</div>
+        <div class="boot__bar"><div class="boot__fill"></div></div>
+        <div class="boot__meta"><span class="boot__dots" data-boot-label>Cargando</span><span data-boot-pct>0%</span></div>
+      </div>
+    </div>
+    <script>
+      // Paint the loading screen in the colors of the version being opened, in the visitor's language.
+      (function () {
+        var p = location.pathname, b = document.getElementById('boot');
+        b.dataset.theme = p === '/' ? 'arcade' : p.indexOf('/clasica') === 0 ? 'classic' : p.indexOf('/muro') === 0 ? 'muro' : p.indexOf('/mundo') === 0 ? 'mundo' : 'plain';
+        try { if (localStorage.getItem('lang') === 'en') b.querySelector('[data-boot-label]').textContent = 'Loading'; } catch (e) {}
+      })();
+    </script>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
