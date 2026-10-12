@@ -7,34 +7,30 @@ init()
 <template>
   <header class="header">
     <div class="header__container">
-      <a href="/" class="header__logo">
-        yeyo<span class="header__logo--dot">.</span>dev
-      </a>
+      <RouterLink to="/muro" class="header__logo" aria-label="yeyo.dev">
+        YEYO.DEV<sup>®</sup>
+      </RouterLink>
 
       <nav class="header__nav">
-        <a href="#projects">{{ t('nav.work') }}</a>
-        <a href="#services">{{ t('nav.services') }}</a>
-        <a href="#contact">{{ t('nav.contact') }}</a>
+        <a href="/muro#work">{{ t('nav.work') }}</a>
+        <a href="/muro#projects">{{ t('nav.projects') }}</a>
+        <a href="/muro#manifesto">{{ t('nav.manifesto') }}</a>
+        <RouterLink to="/blog">{{ t('nav.blog') }}</RouterLink>
+        <a href="/muro#contact">{{ t('nav.contact') }}</a>
       </nav>
 
       <div class="header__actions">
-        <!-- Language toggle -->
-        <button class="header__lang" @click="toggle" :aria-label="isEs ? 'Switch to English' : 'Cambiar a Español'">
-          <span class="header__lang-track" :class="{ 'header__lang-track--en': !isEs }">
-            <span class="header__lang-thumb" />
-          </span>
-          <span class="header__lang-label header__lang-label--es" :class="{ 'header__lang-label--active': isEs }">ES</span>
-          <span class="header__lang-label header__lang-label--en" :class="{ 'header__lang-label--active': !isEs }">EN</span>
-        </button>
-
-        <a
-          href="https://wa.me/17633524852"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="header__cta"
+        <button
+          class="header__lang"
+          @click="toggle"
+          :aria-label="isEs ? 'Switch to English' : 'Cambiar a Español'"
         >
-          {{ t('nav.letsTalk') }}
+          {{ isEs ? 'EN' : 'ES' }}
+        </button>
+        <a href="/muro#projects" class="pill-btn pill-btn--orange header__work">
+          <span class="header__play" aria-hidden="true">↓</span>{{ t('nav.seeWork') }}
         </a>
+        <a href="/muro#contact" class="pill-btn pill-btn--ink">{{ t('nav.sayHello') }}</a>
       </div>
     </div>
   </header>
@@ -42,138 +38,91 @@ init()
 
 <style lang="scss" scoped>
 .header {
-  background: rgba(4, 4, 12, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 1rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid $border-subtle;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.85rem 1rem;
+
+  @media (min-width: $breakpoint-md) { padding: 0.85rem 2rem; }
 
   &__container {
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
   }
 
   &__logo {
-    font-family: $font-principal;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: $text-primary;
-    text-decoration: none;
-    letter-spacing: -0.02em;
-    flex-shrink: 0;
+    font-family: $font-display;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    letter-spacing: -0.01em;
+    color: $yellow;
+    -webkit-text-stroke: 1.5px $ink;
+    paint-order: stroke fill;
+    text-shadow: 2px 2px 0 $ink;
+    white-space: nowrap;
 
-    &--dot { color: $accent-primary; }
+    sup {
+      font-size: 0.4em;
+      color: $ink;
+      -webkit-text-stroke: 0;
+      text-shadow: none;
+    }
   }
 
   &__nav {
     display: none;
+    gap: 1.75rem;
+    font-weight: 500;
+    font-size: 1.05rem;
 
-    @media (min-width: $breakpoint-md) {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
+    @media (min-width: $breakpoint-lg) { display: flex; }
 
-    a {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: $text-secondary;
-      text-decoration: none;
-      transition: color 0.2s ease;
-      &:hover { color: $text-primary; }
-    }
+    a:hover { text-decoration: underline; text-underline-offset: 4px; }
   }
 
   &__actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    flex-shrink: 0;
+    gap: 0.6rem;
   }
 
-  // ── Language toggle ──────────────────────────────────────────────────────────
   &__lang {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: $bg-secondary;
-    border: 1px solid $border-subtle;
-    border-radius: 999px;
-    padding: 0.3rem 0.5rem 0.3rem 0.4rem;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: 2px solid $ink;
+    background: $paper;
+    font-family: $font-mono;
+    font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
-    outline: none;
-
-    &:hover {
-      border-color: $border-violet;
-      box-shadow: 0 0 12px rgba(124, 58, 237, 0.2);
-    }
-  }
-
-  &__lang-track {
-    position: relative;
-    width: 28px;
-    height: 16px;
-    background: rgba(124, 58, 237, 0.25);
-    border-radius: 999px;
-    transition: background 0.3s ease;
     flex-shrink: 0;
 
-    &--en {
-      background: rgba(6, 214, 160, 0.25);
-    }
+    &:hover { background: $yellow; }
   }
 
-  &__lang-thumb {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 12px;
-    height: 12px;
+  &__work {
+    display: none;
+    @media (min-width: $breakpoint-md) { display: inline-flex; }
+  }
+
+  &__play {
+    display: grid;
+    place-items: center;
+    width: 1.3rem;
+    height: 1.3rem;
     border-radius: 50%;
-    background: $accent-primary;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
-
-    .header__lang-track--en & {
-      transform: translateX(12px);
-      background: $accent-cyan;
-    }
+    background: $ink;
+    color: $orange;
+    font-size: 0.75rem;
   }
 
-  &__lang-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: $text-muted;
-    transition: color 0.25s ease;
-    font-family: 'Roboto', sans-serif;
-
-    &--active { color: $text-primary; }
-  }
-
-  &__cta {
-    padding: 0.5rem 1.25rem;
-    border-radius: 999px;
-    background: $accent-primary;
-    color: $text-primary;
-    font-size: 0.875rem;
-    font-weight: 600;
-    font-family: 'Roboto', sans-serif;
-    transition: all 0.25s ease;
-    box-shadow: 0 0 16px $accent-glow;
-    white-space: nowrap;
-
-    &:hover {
-      background: $accent-light;
-      transform: translateY(-1px);
-    }
-  }
+  .pill-btn { padding: 0.55rem 1.1rem; white-space: nowrap; }
 }
 </style>
