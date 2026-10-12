@@ -87,6 +87,11 @@ const launch = (index: number) => {
 // Desktop: first click picks the cartridge, a second one plays it.
 const pick = (index: number) => {
   if (launching.value) return
+  // On phones a tap while scrolling must never start a version; only the «Jugar» button does.
+  if (isTouch.value) {
+    active.value = index
+    return
+  }
   if (index === active.value) return launch(index)
   active.value = index
   select()
@@ -477,6 +482,8 @@ $desktop: 761px;
   }
 
   &.is-launching &__flash { animation: flash 0.9s ease forwards; }
+
+  @media (max-width: 760px) { &__flash { background: #0b0a1a; } }
 }
 
 .cart {
@@ -515,7 +522,12 @@ $desktop: 761px;
     }
   }
 
-  &--launch { animation: insert 0.9s cubic-bezier(0.6, -0.3, 0.7, 0.4) forwards !important; }
+  &--launch {
+    animation: insert 0.9s cubic-bezier(0.6, -0.3, 0.7, 0.4) forwards !important;
+
+    // In the phone list a cartridge falling 70vh looks like a broken page: just pulse instead.
+    @media (max-width: 760px) { animation: launch-pulse 0.6s ease forwards !important; }
+  }
 
   &__p1 {
     display: none;
@@ -662,6 +674,10 @@ $desktop: 761px;
   30% { transform: translateY(-30px) scale(1.04); }
   100% { transform: translateY(70vh) scale(0.9); }
 }
+@keyframes launch-pulse {
+  40% { transform: scale(1.03); }
+  100% { transform: scale(0.98); opacity: 0.6; }
+}
 @keyframes flash {
   0%, 55% { opacity: 0; }
   75%, 100% { opacity: 1; }
@@ -670,4 +686,11 @@ $desktop: 761px;
 @media (prefers-reduced-motion: reduce) {
   .cart--active { animation: none; }
 }
+
+</style>
+
+<style lang="scss">
+// Overscroll/bounce on phones must show the arcade dark, not the white page body.
+html:has(.select),
+html:has(.select) body { background: #0b0a1a; }
 </style>
