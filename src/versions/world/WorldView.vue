@@ -6,7 +6,10 @@ import { useLanguage } from '@/composables/useLanguage'
 import { WorldEngine, type NpcId } from './engine'
 import LeadForm from '@/components/shared/LeadForm.vue'
 import ProjectsExplorer from '@/components/shared/ProjectsExplorer.vue'
+import CdnImg from '@/components/shared/CdnImg.vue'
 import { useLostVisitor } from '@/composables/useLostVisitor'
+import { preloadFonts, preloadImages, usePagePreload } from '@/composables/usePreloader'
+import { cdn } from '@/data/cdn'
 
 type Speaker = NpcId | 'yeyo'
 
@@ -15,6 +18,16 @@ const { isEs, toggle } = useLanguage()
 const { soundOn, toggleSound, talk, deliver, select, start, step } = useArcade()
 
 const canvas = ref<HTMLCanvasElement>()
+
+// The loading screen stays until the planet art and the 3D Yeyo are ready, so the
+// intro never flashes an empty canvas.
+const preload = usePagePreload('mundo')
+preload.add(
+  ...preloadFonts(['Bungee', 'Permanent Marker', 'Instrument Sans']),
+  ...preloadImages([cdn('/game/intro.jpg', 900), cdn('/game/yeyo.jpg', 160)]),
+)
+let modelLoaded!: () => void
+const modelTask = preload.add(new Promise<void>((resolve) => (modelLoaded = resolve)))
 const engine = shallowRef<WorldEngine>()
 const phase = ref<'intro' | 'play'>('intro')
 const progress = ref(0)
@@ -243,13 +256,21 @@ onMounted(async () => {
   window.addEventListener('resize', onResize)
   await document.fonts?.ready
   engine.value = new WorldEngine(canvas.value!, {
-    onProgress: (r) => (progress.value = r),
+    onProgress: (r) => {
+      progress.value = r
+      preload.track(modelTask, r)
+    },
     onNear: (id) => (near.value = id),
     onStep: step,
   })
   if (import.meta.env.DEV) Object.assign(window, { __world: engine.value })
   compassTimer = window.setInterval(updateCompass, 120)
-  await engine.value.load('/game/yeyo.glb')
+  try {
+    await engine.value.load('/game/yeyo.glb')
+  } finally {
+    // One painted frame before revealing, so the canvas is never black.
+    requestAnimationFrame(() => modelLoaded())
+  }
 })
 
 onBeforeUnmount(() => {
@@ -278,7 +299,7 @@ const allNpcs: Speaker[] = ['yeyo', 'bakano', 'pastry', 'dental', 'robot', 'gall
     <!-- Intro / title screen -->
     <Transition name="fade">
       <section v-if="phase === 'intro'" class="intro">
-        <img src="/game/intro.jpg" alt="" class="intro__planet" />
+        <CdnImg src="/game/intro.jpg" :width="900" class="intro__planet" eager />
         <h1 class="intro__title" aria-label="YEYO.DEV">
           <span>YEYO</span><span>.DEV</span>
         </h1>
@@ -340,7 +361,7 @@ const allNpcs: Speaker[] = ['yeyo', 'bakano', 'pastry', 'dental', 'robot', 'gall
     <Transition name="fade">
       <div v-if="coach" class="coach" role="dialog" :aria-label="t('world.guide.title')" @click.self="closeCoach">
         <div class="coach__card">
-          <img src="/game/yeyo.jpg" alt="" class="coach__avatar" />
+          <CdnImg src="/game/yeyo.jpg" :width="80" class="coach__avatar" />
           <h2>{{ t('world.guide.title') }}</h2>
           <div v-if="!isTouch" class="coach__keys" aria-hidden="true">
             <span class="k k--w">W</span>
@@ -364,7 +385,7 @@ const allNpcs: Speaker[] = ['yeyo', 'bakano', 'pastry', 'dental', 'robot', 'gall
     <!-- Dialog box -->
     <Transition name="dialog">
       <div v-if="dialog.open" class="dialog" @click="advance">
-        <img :src="portraits[dialog.who]" alt="" class="dialog__portrait" />
+        <CdnImg :key="dialog.who" :src="portraits[dialog.who]" :width="160" class="dialog__portrait" eager />
         <div class="dialog__box">
           <p class="dialog__name">
             {{ t(`world.npcs.${dialog.who}.name`) }}
@@ -412,7 +433,7 @@ const allNpcs: Speaker[] = ['yeyo', 'bakano', 'pastry', 'dental', 'robot', 'gall
             <button class="dialog__btn" @click="openPanel('projects')"><i class="fa-solid fa-star" style="color: #ffe14d" aria-hidden="true" /> {{ t('world.npcs.gallery.open') }}</button>
           </div>
           <article v-for="id in allNpcs" :key="id" class="textmode__item">
-            <img :src="portraits[id]" alt="" />
+            <CdnImg :src="portraits[id]" :width="72" />
             <div>
               <h3>{{ t(`world.npcs.${id}.name`) }} <span>{{ t(`world.npcs.${id}.role`) }}</span></h3>
               <p v-for="(line, i) in (tm(`world.npcs.${id}.lines`) as string[])" :key="i">{{ line }}</p>
