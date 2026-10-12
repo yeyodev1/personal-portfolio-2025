@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import { Application } from '@splinetool/runtime'
+import { sendSignal } from '@/composables/usePreloader'
 
 interface Props {
   scene: string
@@ -32,6 +33,8 @@ onMounted(async () => {
     isLoaded.value = true
   } catch (e) {
     console.error('[SplineScene] failed to load scene', e)
+  } finally {
+    sendSignal('spline')
   }
 })
 
