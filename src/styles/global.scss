@@ -17,6 +17,8 @@
 }
 
 html {
+  // Decorative stickers and glows may bleed past the edges; never as a sideways scroll on phones.
+  overflow-x: clip;
   font-size: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
