@@ -7,6 +7,7 @@ import Header from './components/global/Header.vue'
 import ToastNotification from './components/global/ToastNotification.vue'
 import DevTerminal from './components/base/DevTerminal.vue'
 import VersionSwitch from './components/global/VersionSwitch.vue'
+import WhatsAppGate from './components/global/WhatsAppGate.vue'
 import { useLanguage } from '@/composables/useLanguage'
 
 const route = useRoute()
@@ -32,6 +33,7 @@ router.afterEach((to) => {
   <RouterView v-else />
   <VersionSwitch v-if="route.name !== 'select'" />
   <ToastNotification />
+  <WhatsAppGate />
 </template>
 
 <style lang="scss">
