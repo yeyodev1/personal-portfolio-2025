@@ -1,4 +1,4 @@
-export const EMAIL = 'diegorele13@gmail.com'
+export const EMAIL = 'me@yeyo.dev'
 export const WHATSAPP = 'https://wa.me/593963681303'
 export const INSTAGRAM = 'https://www.instagram.com/yeyo.dev/'
 
