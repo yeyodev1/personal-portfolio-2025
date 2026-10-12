@@ -11,6 +11,7 @@ const es = {
     contact: 'Contacto',
     seeWork: 'Ver proyectos',
     sayHello: 'Cuéntame tu idea',
+    sayHelloShort: 'Hablemos',
   },
   hero: {
     eyebrow: ['Yeyo.dev', 'Software para negocios', 'CTO en Bakano'],
@@ -122,6 +123,7 @@ const en: typeof es = {
     contact: 'Contact',
     seeWork: 'See projects',
     sayHello: 'Tell me your idea',
+    sayHelloShort: "Let's talk",
   },
   hero: {
     eyebrow: ['Yeyo.dev', 'Software for businesses', 'CTO at Bakano'],
