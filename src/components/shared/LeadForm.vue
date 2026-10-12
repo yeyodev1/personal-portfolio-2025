@@ -21,7 +21,7 @@ const needs: { id: Need; icon: string; color: string }[] = [
   { id: 'integracion', icon: 'fa-solid fa-plug', color: '#f59e0b' },
   { id: 'otro', icon: 'fa-solid fa-lightbulb', color: '#eab308' },
 ]
-const budgets = ['menos-1k', '1k-3k', '3k-8k', '8k-mas', 'no-se']
+const budgets = ['800-1.5k', '1.5k-3k', '3k-8k', '8k-mas']
 const timelines = ['urgente', '1-mes', '1-3-meses', 'explorando']
 </script>
 
@@ -89,7 +89,7 @@ const timelines = ['urgente', '1-mes', '1-3-meses', 'explorando']
 
         <div class="lf__row">
           <fieldset class="lf__field">
-            <legend>{{ t('lead.budget') }}</legend>
+            <legend>{{ t('lead.budget') }} *</legend>
             <div class="lf__chips lf__chips--small">
               <button
                 v-for="b in budgets"
@@ -118,6 +118,18 @@ const timelines = ['urgente', '1-mes', '1-3-meses', 'explorando']
               </button>
             </div>
           </fieldset>
+        </div>
+
+        <div class="lf__min" role="note">
+          <i class="fa-solid fa-circle-info" aria-hidden="true" />
+          <div>
+            <strong>{{ t('lead.minTitle') }}</strong>
+            <p>{{ t('lead.minText') }}</p>
+            <label class="lf__accept">
+              <input v-model="form.acceptsMinimum" type="checkbox" required />
+              <span>{{ t('lead.accept') }}</span>
+            </label>
+          </div>
         </div>
 
         <p v-if="status === 'error'" class="lf__error" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true" /> {{ error }}</p>
@@ -253,6 +265,30 @@ const timelines = ['urgente', '1-mes', '1-3-meses', 'explorando']
   }
 
   &--classic &__chips button.on { color: #fff; }
+
+  &__min {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border: 2px dashed #c9a227;
+    border-radius: calc(var(--f-radius) - 2px);
+    background: rgba(255, 225, 77, 0.16);
+
+    > i { color: #e0a400; font-size: 1.2rem; margin-top: 0.15rem; }
+    strong { display: block; font-size: 1rem; }
+    p { font-size: 0.9rem; opacity: 0.85; margin: 0.15rem 0 0.6rem; }
+  }
+
+  &__accept {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+
+    input { width: 1.15rem; height: 1.15rem; accent-color: var(--f-accent); flex-shrink: 0; }
+  }
 
   &__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
