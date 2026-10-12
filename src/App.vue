@@ -14,7 +14,7 @@ const router = useRouter()
 const { init } = useLanguage()
 onMounted(init)
 
-// Light pages (the blog) have nothing heavy to wait for, so the loading screen leaves at once.
+// Light pages have nothing heavy to wait for, so the loading screen leaves at once.
 router.afterEach((to) => {
   if (!to.meta.preload) nextTick(hidePreloader)
 })
