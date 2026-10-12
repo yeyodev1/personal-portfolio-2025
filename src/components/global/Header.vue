@@ -15,7 +15,6 @@ init()
         <a href="/muro#work">{{ t('nav.work') }}</a>
         <a href="/muro#projects">{{ t('nav.projects') }}</a>
         <a href="/muro#manifesto">{{ t('nav.manifesto') }}</a>
-        <RouterLink to="/blog">{{ t('nav.blog') }}</RouterLink>
         <a href="/muro#contact">{{ t('nav.contact') }}</a>
       </nav>
 
