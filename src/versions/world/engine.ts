@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OutlineEffect } from 'three/examples/jsm/effects/OutlineEffect.js'
+import { cdn } from '@/data/cdn'
 
 // ─── A tiny walkable planet, Messenger-style ─────────────────────────────────
 // Everything lives on a sphere of radius R. The player is a unit vector `p` on
@@ -278,9 +279,14 @@ const buildGallery = () => {
   board.position.y = 2.2
   g.add(board)
   GALLERY_SHOTS.forEach((src, i) => {
-    const tex = loader.load(src)
-    tex.colorSpace = THREE.SRGBColorSpace
-    const shot = new THREE.Mesh(new THREE.PlaneGeometry(1.45, 0.95), new THREE.MeshBasicMaterial({ map: tex }))
+    // Cloudinary serves CORS headers; fall back to the bundled copy if it is unreachable.
+    const shot = new THREE.Mesh(new THREE.PlaneGeometry(1.45, 0.95), new THREE.MeshBasicMaterial())
+    const useTexture = (t: THREE.Texture) => {
+      t.colorSpace = THREE.SRGBColorSpace
+      shot.material.map = t
+      shot.material.needsUpdate = true
+    }
+    loader.load(cdn(src, 512), useTexture, undefined, () => loader.load(src, useTexture))
     shot.position.set(-1.6 + (i % 3) * 1.6, 3.1 - Math.floor(i / 3) * 1.1, 0.14)
     shot.userData.outlineParameters = { visible: false }
     g.add(shot)
