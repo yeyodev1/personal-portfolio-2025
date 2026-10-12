@@ -16,7 +16,6 @@ const currentYear = new Date().getFullYear()
       <nav class="footer__group">
         <a href="/muro#work">{{ t('nav.work') }}</a>
         <a href="/muro#manifesto">{{ t('nav.manifesto') }}</a>
-        <RouterLink to="/blog">{{ t('nav.blog') }}</RouterLink>
         <a href="/muro#contact">{{ t('nav.contact') }}</a>
       </nav>
       <nav class="footer__group">
