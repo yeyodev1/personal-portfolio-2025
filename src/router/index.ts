@@ -36,19 +36,7 @@ const router = createRouter({
       component: () => import('../versions/world/WorldView.vue'),
       meta: { chrome: 'none', preload: true },
     },
-    {
-      path: '/blog',
-      name: 'blog',
-      component: () => import('../views/BlogView.vue'),
-      meta: { chrome: 'stickers' },
-    },
-    {
-      path: '/blog/:slug',
-      name: 'blog-post',
-      component: () => import('../views/BlogPostView.vue'),
-      props: true,
-      meta: { chrome: 'stickers' },
-    },
+    { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
   scrollBehavior(to) {
     if (to.hash) return { el: to.hash, behavior: 'smooth' }
