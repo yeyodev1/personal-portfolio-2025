@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import HeroSection from '@/components/homeSections/HeroSection.vue'
-import ProjectSection from '@/components/homeSections/ProjectSection.vue'
-import ServicesSection from '@/components/homeSections/ServicesSection.vue'
-import GithubSection from '@/components/homeSections/GithubSection.vue'
+import WorkWall from '@/components/homeSections/WorkWall.vue'
+import StackMarquee from '@/components/homeSections/StackMarquee.vue'
+import ArchiveSection from '@/components/homeSections/ArchiveSection.vue'
+import ManifestoSection from '@/components/homeSections/ManifestoSection.vue'
 import ContactSection from '@/components/homeSections/ContactSection.vue'
+import FloatingBadge from '@/components/ui/FloatingBadge.vue'
 </script>
 
 <template>
-  <main>
-    <HeroSection />
-    <ProjectSection />
-    <ServicesSection />
-    <GithubSection />
-    <ContactSection />
-  </main>
+  <HeroSection />
+  <WorkWall />
+  <StackMarquee />
+  <ArchiveSection />
+  <ManifestoSection />
+  <ContactSection />
+  <FloatingBadge />
 </template>
