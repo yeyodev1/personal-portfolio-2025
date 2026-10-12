@@ -4,6 +4,8 @@ declare module 'vue-router' {
   interface RouteMeta {
     // 'stickers' wraps the page in the sticker-wall header/footer; 'none' renders it bare.
     chrome?: 'stickers' | 'none'
+    // Pages that wait for their heavy assets behind the loading screen (see usePreloader).
+    preload?: boolean
   }
 }
 
@@ -14,25 +16,25 @@ const router = createRouter({
       path: '/',
       name: 'select',
       component: () => import('../views/SelectView.vue'),
-      meta: { chrome: 'none' },
+      meta: { chrome: 'none', preload: true },
     },
     {
       path: '/clasica',
       name: 'clasica',
       component: () => import('../versions/classic/ClassicView.vue'),
-      meta: { chrome: 'none' },
+      meta: { chrome: 'none', preload: true },
     },
     {
       path: '/muro',
       name: 'muro',
       component: () => import('../views/HomeView.vue'),
-      meta: { chrome: 'stickers' },
+      meta: { chrome: 'stickers', preload: true },
     },
     {
       path: '/mundo',
       name: 'mundo',
       component: () => import('../versions/world/WorldView.vue'),
-      meta: { chrome: 'none' },
+      meta: { chrome: 'none', preload: true },
     },
     {
       path: '/blog',
