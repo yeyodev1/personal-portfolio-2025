@@ -17,6 +17,7 @@ export function useLead(source: string) {
     description: '',
     budget: '',
     timeline: '',
+    acceptsMinimum: false,
     website: '', // honeypot
   })
   const status = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -31,6 +32,12 @@ export function useLead(source: string) {
 
   const submit = async () => {
     if (status.value === 'sending') return
+    // Qualify before sending: projects start at $800.
+    if (!form.budget || !form.acceptsMinimum) {
+      error.value = t(!form.budget ? 'lead.budgetRequired' : 'lead.acceptRequired')
+      status.value = 'error'
+      return
+    }
     status.value = 'sending'
     error.value = ''
     try {
@@ -52,7 +59,7 @@ export function useLead(source: string) {
   }
 
   const reset = () => {
-    Object.assign(form, { name: '', email: '', whatsapp: '', company: '', needs: [], description: '', budget: '', timeline: '', website: '' })
+    Object.assign(form, { name: '', email: '', whatsapp: '', company: '', needs: [], description: '', budget: '', timeline: '', acceptsMinimum: false, website: '' })
     status.value = 'idle'
   }
 
