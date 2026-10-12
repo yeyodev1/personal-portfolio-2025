@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { WHATSAPP } from '@/data/links'
+import CdnImg from '@/components/shared/CdnImg.vue'
 
 type Step = { title: string; text: string; desktop?: string; touch?: string }
 
@@ -30,7 +31,7 @@ watch([index, () => props.open], () => emit('step', props.open ? index.value : -
       <div class="guide__backdrop" :class="{ 'guide__backdrop--light': index > 0 }" @click="emit('close')" />
       <div class="guide__card">
         <div class="guide__head">
-          <img src="/game/yeyo.jpg" alt="" class="guide__avatar" />
+          <CdnImg src="/game/yeyo.jpg" :width="64" class="guide__avatar" eager />
           <div>
             <span class="guide__who">{{ t('select.guide.who') }}</span>
             <span class="guide__count">{{ t('select.guide.step', { n: index + 1, total: steps.length }) }}</span>
