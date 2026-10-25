@@ -41,7 +41,7 @@ const router = createRouter({
     {
       path: '/terminos',
       name: 'terminos',
-      alias: ['/terminos-y-condiciones', '/terms'],
+      alias: ['/terminos-y-condiciones', '/condiciones-de-servicio', '/terms'],
       component: () => import('../views/LegalView.vue'),
       meta: { chrome: 'none', legal: true },
     },
