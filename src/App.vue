@@ -31,7 +31,7 @@ router.afterEach((to) => {
     <DevTerminal />
   </template>
   <RouterView v-else />
-  <VersionSwitch v-if="route.name !== 'select'" />
+  <VersionSwitch v-if="route.name !== 'select' && !route.meta.legal" />
   <ToastNotification />
   <WhatsAppGate />
 </template>

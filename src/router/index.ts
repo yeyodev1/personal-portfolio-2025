@@ -6,6 +6,8 @@ declare module 'vue-router' {
     chrome?: 'stickers' | 'none'
     // Pages that wait for their heavy assets behind the loading screen (see usePreloader).
     preload?: boolean
+    // Páginas legales: sin el selector de versión encima del texto.
+    legal?: boolean
   }
 }
 
@@ -35,6 +37,20 @@ const router = createRouter({
       name: 'mundo',
       component: () => import('../versions/world/WorldView.vue'),
       meta: { chrome: 'none', preload: true },
+    },
+    {
+      path: '/terminos',
+      name: 'terminos',
+      alias: ['/terminos-y-condiciones', '/terms'],
+      component: () => import('../views/LegalView.vue'),
+      meta: { chrome: 'none', legal: true },
+    },
+    {
+      path: '/aviso-legal',
+      name: 'aviso-legal',
+      alias: ['/legal', '/privacidad'],
+      component: () => import('../views/LegalView.vue'),
+      meta: { chrome: 'none', legal: true },
     },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
